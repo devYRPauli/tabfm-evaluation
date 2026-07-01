@@ -51,7 +51,7 @@ context than the GPU because of the 64 GB unified memory, but is much slower.)
 The GPU is roughly 15 to 25x faster than the Studio CPU at these sizes (n=100:
 33.4 s CPU vs 2.3 s GPU = 14x; n=500: 76.4 s vs 3.15 s = 24x). But the GPU is
 capped at ~10k context by its 24 GB memory, while the CPU can hold 78k-150k
-context in 64 GB (or 125 GB on the workstation) at the cost of ~1 hour per fold.
+context in 64 GB (or 128 GB on the workstation) at the cost of ~1 hour per fold.
 
 So the practical picture:
 1. Small-to-mid context (up to ~10k rows): use the GPU, seconds to ~2 minutes.

@@ -19,7 +19,7 @@ from collections import defaultdict
 RES = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                    "results", "phase3")
 TABFM_MODELS = ["default", "ensemble"]
-BASE_MODELS = ["xgboost_light", "xgboost_heavy", "random_forest", "linear_floor", "tabpfn"]
+BASE_MODELS = ["xgboost_light", "xgboost_heavy", "xgboost_optuna", "random_forest", "linear_floor", "tabpfn"]
 TARGET = ["blood-transfusion-service-center", "credit-g", "maternal_health_risk",
           "students_dropout_and_academic_success", "churn", "MIC", "Bioresponse",
           "concrete_compressive_strength", "wine_quality", "houses", "diamonds",

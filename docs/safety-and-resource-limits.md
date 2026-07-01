@@ -26,7 +26,7 @@ and never concurrently with another TabFM job.
 ## Hard rules (apply to every TabFM run from now on)
 
 1. Heavy TabFM runs (full config, Phases 1 to 4) default to the Studio (64 GB) and
-   the workstation (125 GB or GPU). The 16 GB MacBook is memory-marginal for this
+   the workstation (128 GB or GPU). The 16 GB MacBook is memory-marginal for this
    model and is not a default compute target.
 2. Any command that loads a TabFM model on the MacBook must run through
    `harness/safe_run.sh` with the 16 GB defaults (mem <= 9 GB RSS, disk >= 15 GB,
@@ -63,7 +63,7 @@ and never concurrently with another TabFM job.
 harness/sysmon.sh and harness/safe_run.sh are macOS-tuned (they use
 `sysctl vm.swapusage`, `vm_stat`, `df -g` on the home volume). They are the guard
 on the Macs. On the Linux workstation they do not run as-is. There the OS-restart
-risk is negligible (125 GB RAM against a roughly 22 GB working set), so we rely on
+risk is negligible (128 GB RAM against a roughly 22 GB working set), so we rely on
 the large RAM headroom, a `free -h` pre-check, and `nvidia-smi` for the real
 constraint (24 GB GPU memory, where an overflow errors the process rather than
 taking down the machine). A Linux port of the watchdog is a TODO if deeper
@@ -80,4 +80,4 @@ the hardware comparison is Studio CPU versus single-4090 GPU.
 The 32-member ensemble allocated about 22.7 GiB on the workstation GPU. The weights
 cache is about 11 to 12 GB on disk. Treat a default full forward pass as a
 20 GB-plus working set. That fits comfortably on the Studio (64 GB) and workstation
-(125 GB), and does not fit on the 16 GB MacBook without aggressive capping.
+(128 GB), and does not fit on the 16 GB MacBook without aggressive capping.

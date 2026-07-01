@@ -8,7 +8,7 @@ single forward pass, and is the only machine that can realistically approach the
 ## Hardware (verified)
 Hostname: FPT-server
 CPU: AMD Ryzen Threadripper PRO 5955WX, 16 cores / 32 threads
-System memory: 125 GiB
+System memory: 128 GB (free reports 125 GiB usable)
 Architecture: x86_64
 GPU: 2x NVIDIA GeForce RTX 4090, 24564 MiB each
 NVIDIA driver: 580.159.03

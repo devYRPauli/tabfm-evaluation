@@ -107,7 +107,7 @@ Three machines, one role each. Full provenance in [provenance/](provenance/).
    early attempt OOM-restarted the machine, which is why the safety layer exists (see
    [docs/safety-and-resource-limits.md](docs/safety-and-resource-limits.md)).
 2. Mac Studio (M4 Max, 64 GB): JAX CPU reference.
-3. Workstation (Threadripper PRO 5955WX, 125 GB, 2x RTX 4090): single-GPU reference
+3. Workstation (Threadripper PRO 5955WX, 128 GB, 2x RTX 4090): single-GPU reference
    (multi-GPU is unusable, see the bugs).
 
 Pinned stack: Python 3.12, jax 0.10.2, flax 0.12.7, commit b6ea70b. Google's
