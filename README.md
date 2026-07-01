@@ -202,8 +202,13 @@ its authors.
 
 1. TabFM is by Google Research. It was introduced in the blog post "Introducing
    TabFM: A zero-shot foundation model for tabular data" (June 30, 2026) by
-   Weihao Kong and Abhimanyu Das, Research Scientists at Google Research. Code:
-   [google-research/tabfm](https://github.com/google-research/tabfm). Weights:
+   Weihao Kong ([@weihaokong](https://github.com/weihaokong)) and Abhimanyu Das,
+   Research Scientists at Google Research. Additional contributors to the
+   [code repository](https://github.com/google-research/tabfm) include
+   Erez Louidor ([@erzel](https://github.com/erzel)),
+   Anna Eilering ([@ananci](https://github.com/ananci)),
+   [@tamannarayan](https://github.com/tamannarayan), and
+   [@tmacleod](https://github.com/tmacleod). Weights:
    [google/tabfm-1.0.0-jax and google/tabfm-1.0.0-pytorch](https://huggingface.co/google/tabfm-1.0.0-pytorch).
 2. The benchmark is [TabArena](https://github.com/autogluon/tabarena) (OpenML Study
    457), curated by the TabArena team, built on [OpenML](https://www.openml.org).
