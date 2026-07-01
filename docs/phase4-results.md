@@ -18,10 +18,16 @@ Raw data in results/phase4/.
 | >10000 | OOM | exceeds 24 GB |
 
 Two findings:
-1. Peak GPU memory is essentially flat at ~22.75 GB across all context sizes. The
-   32-member ensemble model itself nearly fills the 24 GB card; the context adds
-   little memory but pushes it over 24 GB beyond about 10000 rows. So a 24 GB GPU
-   has a hard context ceiling near 10k rows, which is why the 78k and 150k datasets
+1. Reported peak GPU memory is flat at ~22.75 GB across all context sizes. CAVEAT:
+   this sweep did not set XLA_PYTHON_CLIENT_PREALLOCATE=false, and it reads
+   `nvidia-smi memory.used`, which reports the whole preallocated pool, not the live
+   working set. XLA preallocates a large fraction of the card by default, which by
+   itself produces a flat peak and a hard OOM once the working set exceeds the pool.
+   So the flat 22.75 GB is most likely an allocator artifact, NOT evidence that the
+   ensemble model fills the card. The OOM past ~10k rows is a real observed failure,
+   but the mechanism (true model footprint vs preallocated pool) is unresolved
+   pending a control run with preallocation disabled. This is why the 78k and 150k
+   datasets
    fail on GPU and fall back to CPU.
 2. Latency is strongly super-linear in context: 100 rows is 2.3 s, 10000 rows is
    105.7 s (a 46x latency increase for 100x the context).

@@ -139,8 +139,12 @@ Single-predict latency vs in-context rows (32-member ensemble, 20 features):
 | 10000 | 105.7 s | 22.78 GB | - |
 | >10000 | OOM | >24 GB | fits, slow |
 
-Peak GPU memory is flat at ~22.75 GB (the ensemble model, not the context, fills the
-card), so a 24 GB GPU has a hard context ceiling near 10k rows. The GPU is ~15 to 25x
+Reported peak memory was flat at ~22.75 GB, but this run did NOT disable XLA
+preallocation, so that figure most likely reflects XLA's preallocated pool rather
+than the model's true working set. The OOM past ~10k rows is real (the job fails);
+whether that limit is the model footprint or the preallocated pool being exceeded
+is not yet established. A control run with XLA_PYTHON_CLIENT_PREALLOCATE=false is
+pending. The GPU is ~15 to 25x
 faster than CPU where it fits; there is no speed crossover, only a memory ceiling.
 
 ## Conclusions

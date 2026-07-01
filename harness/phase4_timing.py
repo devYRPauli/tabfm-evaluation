@@ -50,6 +50,13 @@ import time
 import numpy as np
 from sklearn.datasets import make_classification
 
+# Measure the model's true working set, not XLA's preallocated pool. XLA
+# preallocates a large fraction of the GPU by default, which makes nvidia-smi
+# memory.used report a flat, misleading peak. Disable it unless the caller sets
+# the env var explicitly (set XLA_PYTHON_CLIENT_PREALLOCATE=true to reproduce the
+# original preallocated-pool measurement). This must run before jax is imported.
+os.environ.setdefault("XLA_PYTHON_CLIENT_PREALLOCATE", "false")
+
 SEED = 0
 DEFAULT_CONTEXT_SIZES = [100, 500, 1000, 2000, 5000, 10000, 20000, 40000]
 N_WARMUP = 1
