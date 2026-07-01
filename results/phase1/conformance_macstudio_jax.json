@@ -1,0 +1,86 @@
+{
+  "provenance": {
+    "host_label": "macstudio",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.12.13",
+    "backend": "jax",
+    "seed": 0,
+    "versions": {
+      "tabfm": "1.0.0",
+      "jax": "0.10.2",
+      "jaxlib": "0.10.2",
+      "flax": "0.12.7",
+      "torch": "not-installed",
+      "numpy": "2.5.0",
+      "scikit-learn": "1.9.0"
+    },
+    "jax_devices": [
+      "cpu:0"
+    ],
+    "task": {
+      "n_samples": 250,
+      "n_test": 50,
+      "n_features": 8,
+      "n_classes": 3
+    }
+  },
+  "elapsed_s": 161.32900977134705,
+  "checks": [
+    {
+      "name": "clf.predict shape",
+      "ok": true,
+      "detail": "got (50,), want (50,)"
+    },
+    {
+      "name": "clf.predict_proba shape",
+      "ok": true,
+      "detail": "got (50, 3), want (50, 3)"
+    },
+    {
+      "name": "clf.classes_ present",
+      "ok": true,
+      "detail": "[0 1 2]"
+    },
+    {
+      "name": "clf.classes_ matches labels",
+      "ok": true,
+      "detail": "classes_=[0, 1, 2]"
+    },
+    {
+      "name": "proba rows sum to 1",
+      "ok": true,
+      "detail": "max abs dev from 1.0 = 1.19e-07"
+    },
+    {
+      "name": "predict equals argmax(proba)",
+      "ok": true,
+      "detail": "50 / 50 rows agree"
+    },
+    {
+      "name": "clf determinism (fixed seed)",
+      "ok": true,
+      "detail": "max abs diff across two runs = 0.000e+00"
+    },
+    {
+      "name": "reg.predict shape",
+      "ok": true,
+      "detail": "got (50,), want (50,)"
+    },
+    {
+      "name": "reg.predict finite",
+      "ok": true,
+      "detail": "min=-144.312 max=229.039"
+    },
+    {
+      "name": "reg determinism (fixed seed)",
+      "ok": true,
+      "detail": "max abs diff across two runs = 0.000e+00"
+    }
+  ],
+  "metrics": {
+    "proba_determinism_max_abs_diff": 0.0,
+    "pred_determinism_max_abs_diff": 0.0
+  },
+  "overall_pass": true
+}

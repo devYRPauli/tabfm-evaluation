@@ -1,0 +1,37 @@
+{
+  "provenance": {
+    "task_id": 363631,
+    "dataset": "diamonds",
+    "fold": 0,
+    "model_type": "regression",
+    "n_train": 35960,
+    "n_test": 17980,
+    "n_features": 9,
+    "seed": 0,
+    "jax_device": "cuda:0",
+    "versions": {
+      "python": "3.12.13",
+      "tabfm": "1.0.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3"
+    }
+  },
+  "results": {
+    "default": {
+      "metrics": {
+        "rmse": 503.4276122614644,
+        "r2": 0.9845321025027921
+      },
+      "fit_predict_s": 2611.5037133693695
+    },
+    "ensemble": {
+      "metrics": {
+        "rmse": 497.99784678997855,
+        "r2": 0.9848639640399833
+      },
+      "fit_predict_s": 3795.8712673187256
+    }
+  }
+}

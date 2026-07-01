@@ -1,0 +1,37 @@
+{
+  "provenance": {
+    "task_id": 363708,
+    "dataset": "wine_quality",
+    "fold": 0,
+    "model_type": "regression",
+    "n_train": 4331,
+    "n_test": 2166,
+    "n_features": 12,
+    "seed": 0,
+    "jax_device": "cuda:0",
+    "versions": {
+      "python": "3.12.13",
+      "tabfm": "1.0.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3"
+    }
+  },
+  "results": {
+    "default": {
+      "metrics": {
+        "rmse": 0.5772955608387232,
+        "r2": 0.5420863892236505
+      },
+      "fit_predict_s": 52.90436363220215
+    },
+    "ensemble": {
+      "metrics": {
+        "rmse": 0.5788524465070833,
+        "r2": 0.5396132004165015
+      },
+      "fit_predict_s": 181.38286590576172
+    }
+  }
+}

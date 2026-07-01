@@ -1,0 +1,163 @@
+[22:55:48] SKIP tabfm blood-transfusion-service-center fold0 (exists)
+[22:55:48] SKIP baselines blood-transfusion-service-center fold0 (exists)
+[22:55:48] SKIP tabfm blood-transfusion-service-center fold1 (exists)
+[22:55:48] SKIP baselines blood-transfusion-service-center fold1 (exists)
+[22:55:48] SKIP tabfm blood-transfusion-service-center fold2 (exists)
+[22:55:48] SKIP baselines blood-transfusion-service-center fold2 (exists)
+[22:55:48] TabFM credit-g fold0 -> GPU
+[22:57:05]   GPU ok
+[22:57:06] Baselines credit-g fold0 -> Studio CPU
+[22:57:18]   baselines ok
+[22:57:19] TabFM credit-g fold1 -> GPU
+[22:58:31]   GPU ok
+[22:58:32] Baselines credit-g fold1 -> Studio CPU
+[22:58:38]   baselines ok
+[22:58:39] TabFM credit-g fold2 -> GPU
+[22:59:51]   GPU ok
+[22:59:52] Baselines credit-g fold2 -> Studio CPU
+[23:00:01]   baselines ok
+[23:00:02] SKIP tabfm maternal_health_risk fold0 (exists)
+[23:00:02] Baselines maternal_health_risk fold0 -> Studio CPU
+[23:00:11]   baselines ok
+[23:00:12] TabFM maternal_health_risk fold1 -> GPU
+[23:01:21]   GPU ok
+[23:01:22] Baselines maternal_health_risk fold1 -> Studio CPU
+[23:01:34]   baselines ok
+[23:01:35] TabFM maternal_health_risk fold2 -> GPU
+[23:02:44]   GPU ok
+[23:02:45] Baselines maternal_health_risk fold2 -> Studio CPU
+[23:02:57]   baselines ok
+[23:02:58] TabFM concrete_compressive_strength fold0 -> GPU
+[23:04:02]   GPU ok
+[23:04:03] Baselines concrete_compressive_strength fold0 -> Studio CPU
+[23:04:15]   baselines ok
+[23:04:16] TabFM concrete_compressive_strength fold1 -> GPU
+[23:05:16]   GPU ok
+[23:05:17] Baselines concrete_compressive_strength fold1 -> Studio CPU
+[23:05:26]   baselines ok
+[23:05:27] TabFM concrete_compressive_strength fold2 -> GPU
+[23:06:27]   GPU ok
+[23:06:28] Baselines concrete_compressive_strength fold2 -> Studio CPU
+[23:06:38]   baselines ok
+[23:06:38] TabFM MIC fold0 -> GPU
+[23:09:00]   GPU ok
+[23:09:00] Baselines MIC fold0 -> Studio CPU
+[23:09:25]   baselines ok
+[23:09:26] TabFM MIC fold1 -> GPU
+[23:11:42]   GPU ok
+[23:11:43] Baselines MIC fold1 -> Studio CPU
+[23:12:01]   baselines ok
+[23:12:02] TabFM MIC fold2 -> GPU
+[23:14:16]   GPU ok
+[23:14:17] Baselines MIC fold2 -> Studio CPU
+[23:14:29]   baselines ok
+[23:14:30] TabFM Bioresponse fold0 -> GPU
+[23:15:19]   GPU failed (likely OOM), falling back to Studio CPU
+[23:16:26]   CPU ALSO FAILED for Bioresponse fold0
+[23:16:27] Baselines Bioresponse fold0 -> Studio CPU
+[23:16:54]   baselines ok
+[23:16:55] TabFM Bioresponse fold1 -> GPU
+[23:17:38]   GPU failed (likely OOM), falling back to Studio CPU
+[23:18:41]   CPU ALSO FAILED for Bioresponse fold1
+[23:18:42] Baselines Bioresponse fold1 -> Studio CPU
+[23:19:06]   baselines ok
+[23:19:07] TabFM Bioresponse fold2 -> GPU
+[23:19:51]   GPU failed (likely OOM), falling back to Studio CPU
+[23:20:51]   CPU ALSO FAILED for Bioresponse fold2
+[23:20:52] Baselines Bioresponse fold2 -> Studio CPU
+[23:21:20]   baselines ok
+[23:21:21] TabFM students_dropout_and_academic_success fold0 -> GPU
+[23:25:23]   GPU ok
+[23:25:24] Baselines students_dropout_and_academic_success fold0 -> Studio CPU
+[23:25:40]   baselines ok
+[23:25:40] TabFM students_dropout_and_academic_success fold1 -> GPU
+[23:29:38]   GPU ok
+[23:29:39] Baselines students_dropout_and_academic_success fold1 -> Studio CPU
+[23:29:54]   baselines ok
+[23:29:55] TabFM students_dropout_and_academic_success fold2 -> GPU
+[23:33:53]   GPU ok
+[23:33:53] Baselines students_dropout_and_academic_success fold2 -> Studio CPU
+[23:34:06]   baselines ok
+[23:34:07] TabFM churn fold0 -> GPU
+[23:38:28]   GPU ok
+[23:38:29] Baselines churn fold0 -> Studio CPU
+[23:38:41]   baselines ok
+[23:38:42] TabFM churn fold1 -> GPU
+[23:42:58]   GPU ok
+[23:42:59] Baselines churn fold1 -> Studio CPU
+[23:43:08]   baselines ok
+[23:43:09] TabFM churn fold2 -> GPU
+[23:47:25]   GPU ok
+[23:47:26] Baselines churn fold2 -> Studio CPU
+[23:47:35]   baselines ok
+[23:47:36] TabFM wine_quality fold0 -> GPU
+[23:51:55]   GPU ok
+[23:51:55] Baselines wine_quality fold0 -> Studio CPU
+[23:52:14]   baselines ok
+[23:52:15] TabFM wine_quality fold1 -> GPU
+[23:56:23]   GPU ok
+[23:56:24] Baselines wine_quality fold1 -> Studio CPU
+[23:56:37]   baselines ok
+[23:56:37] TabFM wine_quality fold2 -> GPU
+[00:00:56]   GPU ok
+[00:00:56] Baselines wine_quality fold2 -> Studio CPU
+[00:01:09]   baselines ok
+[00:01:09] TabFM houses fold0 -> GPU
+[00:18:30]   GPU ok
+[00:18:31] Baselines houses fold0 -> Studio CPU
+[00:18:59]   baselines ok
+[00:18:59] TabFM houses fold1 -> GPU
+[00:36:02]   GPU ok
+[00:36:03] Baselines houses fold1 -> Studio CPU
+[00:36:24]   baselines ok
+[00:36:25] TabFM houses fold2 -> GPU
+[00:54:37]   GPU ok
+[00:54:38] Baselines houses fold2 -> Studio CPU
+[00:54:59]   baselines ok
+[00:55:00] TabFM diamonds fold0 -> GPU
+[02:42:10]   GPU ok
+[02:42:10] Baselines diamonds fold0 -> Studio CPU
+[02:42:53]   baselines ok
+[02:42:54] TabFM diamonds fold1 -> GPU
+[03:57:12]   GPU failed (likely OOM), falling back to Studio CPU
+[03:57:12]   CPU ALSO FAILED for diamonds fold1
+[03:57:12] Baselines diamonds fold1 -> Studio CPU
+[03:57:12]   baselines FAILED for diamonds fold1
+[03:57:12] TabFM diamonds fold2 -> GPU
+[03:57:12]   GPU failed (likely OOM), falling back to Studio CPU
+[03:57:12]   CPU ALSO FAILED for diamonds fold2
+[03:57:12] Baselines diamonds fold2 -> Studio CPU
+[03:57:12]   baselines FAILED for diamonds fold2
+[03:57:12] TabFM SDSS17 fold0 -> GPU
+[03:57:12]   GPU failed (likely OOM), falling back to Studio CPU
+[03:57:12]   CPU ALSO FAILED for SDSS17 fold0
+[03:57:12] Baselines SDSS17 fold0 -> Studio CPU
+[03:57:12]   baselines FAILED for SDSS17 fold0
+[03:57:12] TabFM SDSS17 fold1 -> GPU
+[03:57:12]   GPU failed (likely OOM), falling back to Studio CPU
+[03:57:12]   CPU ALSO FAILED for SDSS17 fold1
+[03:57:12] Baselines SDSS17 fold1 -> Studio CPU
+[03:57:12]   baselines FAILED for SDSS17 fold1
+[03:57:13] TabFM SDSS17 fold2 -> GPU
+[03:57:13]   GPU failed (likely OOM), falling back to Studio CPU
+[03:57:13]   CPU ALSO FAILED for SDSS17 fold2
+[03:57:13] Baselines SDSS17 fold2 -> Studio CPU
+[03:57:13]   baselines FAILED for SDSS17 fold2
+[03:57:13] TabFM GiveMeSomeCredit fold0 -> GPU
+[03:57:13]   GPU failed (likely OOM), falling back to Studio CPU
+[03:57:13]   CPU ALSO FAILED for GiveMeSomeCredit fold0
+[03:57:13] Baselines GiveMeSomeCredit fold0 -> Studio CPU
+[03:57:13]   baselines FAILED for GiveMeSomeCredit fold0
+[03:57:13] TabFM GiveMeSomeCredit fold1 -> GPU
+[03:57:13]   GPU failed (likely OOM), falling back to Studio CPU
+[03:57:13]   CPU ALSO FAILED for GiveMeSomeCredit fold1
+[03:57:13] Baselines GiveMeSomeCredit fold1 -> Studio CPU
+[03:57:13]   baselines FAILED for GiveMeSomeCredit fold1
+[03:57:13] TabFM GiveMeSomeCredit fold2 -> GPU
+[03:57:13]   GPU failed (likely OOM), falling back to Studio CPU
+[03:57:13]   CPU ALSO FAILED for GiveMeSomeCredit fold2
+[03:57:13] Baselines GiveMeSomeCredit fold2 -> Studio CPU
+[03:57:13]   baselines FAILED for GiveMeSomeCredit fold2
+[03:57:13] sweep pass complete. Results in /Users/yashrajpandey/tabfm-evaluation/results/phase3
+Coverage:
+  59 result files

@@ -1,0 +1,71 @@
+{
+  "provenance": {
+    "task_id": 363620,
+    "dataset": "Bioresponse",
+    "fold": 2,
+    "model_type": "classification",
+    "n_train": 2501,
+    "n_test": 1250,
+    "n_features": 1776,
+    "seed": 0,
+    "versions": {
+      "python": "3.12.13",
+      "xgboost": "3.3.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    },
+    "tabpfn_versions": {
+      "python": "3.12.13",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    }
+  },
+  "results": {
+    "xgboost_light": {
+      "metrics": {
+        "accuracy": 0.808,
+        "roc_auc": 0.8719779483053819,
+        "log_loss": 0.5534765720367432
+      },
+      "fit_predict_s": 0.584611177444458
+    },
+    "xgboost_heavy": {
+      "metrics": {
+        "accuracy": 0.8048,
+        "roc_auc": 0.8755930647523569,
+        "log_loss": 0.4455898404121399
+      },
+      "fit_predict_s": 20.00605273246765
+    },
+    "random_forest": {
+      "metrics": {
+        "accuracy": 0.8032,
+        "roc_auc": 0.8734257998638529,
+        "log_loss": 0.459127778027871
+      },
+      "fit_predict_s": 1.4238252639770508
+    },
+    "linear_floor": {
+      "metrics": {
+        "accuracy": 0.7264,
+        "roc_auc": 0.7613584792788332,
+        "log_loss": 1.5998125534281205
+      },
+      "fit_predict_s": 0.24091696739196777
+    },
+    "tabpfn": {
+      "metrics": {
+        "accuracy": 0.8088,
+        "roc_auc": 0.8787904573302803,
+        "log_loss": 0.4397995173931122
+      },
+      "fit_predict_s": 121.55309104919434
+    }
+  }
+}

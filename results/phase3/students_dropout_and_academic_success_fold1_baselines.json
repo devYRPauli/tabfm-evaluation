@@ -1,0 +1,71 @@
+{
+  "provenance": {
+    "task_id": 363704,
+    "dataset": "students_dropout_and_academic_success",
+    "fold": 1,
+    "model_type": "classification",
+    "n_train": 2949,
+    "n_test": 1475,
+    "n_features": 36,
+    "seed": 0,
+    "versions": {
+      "python": "3.12.13",
+      "xgboost": "3.3.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    },
+    "tabpfn_versions": {
+      "python": "3.12.13",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    }
+  },
+  "results": {
+    "xgboost_light": {
+      "metrics": {
+        "accuracy": 0.7688135593220339,
+        "roc_auc": 0.885598205245597,
+        "log_loss": 0.6375166177749634
+      },
+      "fit_predict_s": 0.6285529136657715
+    },
+    "xgboost_heavy": {
+      "metrics": {
+        "accuracy": 0.7688135593220339,
+        "roc_auc": 0.8927377010636061,
+        "log_loss": 0.561170756816864
+      },
+      "fit_predict_s": 10.065768957138062
+    },
+    "random_forest": {
+      "metrics": {
+        "accuracy": 0.7769491525423728,
+        "roc_auc": 0.8917907682222578,
+        "log_loss": 0.5796187681557555
+      },
+      "fit_predict_s": 1.116710901260376
+    },
+    "linear_floor": {
+      "metrics": {
+        "accuracy": 0.7728813559322034,
+        "roc_auc": 0.8912453115805788,
+        "log_loss": 0.5816674646111745
+      },
+      "fit_predict_s": 0.09141111373901367
+    },
+    "tabpfn": {
+      "metrics": {
+        "accuracy": 0.7810169491525424,
+        "roc_auc": 0.8980894368254365,
+        "log_loss": 0.5372638702392578
+      },
+      "fit_predict_s": 11.32950496673584
+    }
+  }
+}

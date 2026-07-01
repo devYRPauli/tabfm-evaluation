@@ -1,0 +1,39 @@
+{
+  "provenance": {
+    "task_id": 363626,
+    "dataset": "credit-g",
+    "fold": 2,
+    "model_type": "classification",
+    "n_train": 667,
+    "n_test": 333,
+    "n_features": 20,
+    "seed": 0,
+    "jax_device": "cuda:0",
+    "versions": {
+      "python": "3.12.13",
+      "tabfm": "1.0.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3"
+    }
+  },
+  "results": {
+    "default": {
+      "metrics": {
+        "accuracy": 0.7567567567567568,
+        "roc_auc": 0.780901287553648,
+        "log_loss": 0.5091856718063354
+      },
+      "fit_predict_s": 18.973087072372437
+    },
+    "ensemble": {
+      "metrics": {
+        "accuracy": 0.7537537537537538,
+        "roc_auc": 0.7762231759656651,
+        "log_loss": 0.511254580225153
+      },
+      "fit_predict_s": 40.373443841934204
+    }
+  }
+}

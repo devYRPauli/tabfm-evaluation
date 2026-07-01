@@ -1,0 +1,18 @@
+[
+  {
+    "n_train": 1000,
+    "n_features": 100,
+    "n_test": 100,
+    "latency_s_median": 7.116059876047075,
+    "peak_gpu_mem_mib": 23975,
+    "status": "ok"
+  },
+  {
+    "n_train": 5000,
+    "n_features": 100,
+    "n_test": 100,
+    "latency_s_median": 44.92882533604279,
+    "peak_gpu_mem_mib": 19843,
+    "status": "ok"
+  }
+]

@@ -1,0 +1,9 @@
+# build artifacts and vendored upstream
+upstream/
+.venv*/
+__pycache__/
+*.pyc
+.DS_Store
+weights/
+*.egg-info/
+results/**/raw_logs/

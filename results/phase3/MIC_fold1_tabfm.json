@@ -1,0 +1,39 @@
+{
+  "provenance": {
+    "task_id": 363711,
+    "dataset": "MIC",
+    "fold": 1,
+    "model_type": "classification",
+    "n_train": 1133,
+    "n_test": 566,
+    "n_features": 111,
+    "seed": 0,
+    "jax_device": "cuda:0",
+    "versions": {
+      "python": "3.12.13",
+      "tabfm": "1.0.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3"
+    }
+  },
+  "results": {
+    "default": {
+      "metrics": {
+        "accuracy": 0.8904593639575972,
+        "roc_auc": 0.9185592824920605,
+        "log_loss": 0.4015706479549408
+      },
+      "fit_predict_s": 34.60813307762146
+    },
+    "ensemble": {
+      "metrics": {
+        "accuracy": 0.8904593639575972,
+        "roc_auc": 0.9206966352079562,
+        "log_loss": 0.39908294531426225
+      },
+      "fit_predict_s": 88.68890118598938
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "provenance": {
+    "task_id": 363704,
+    "dataset": "students_dropout_and_academic_success",
+    "fold": 1,
+    "model_type": "classification",
+    "n_train": 2949,
+    "n_test": 1475,
+    "n_features": 36,
+    "seed": 0,
+    "jax_device": "cuda:0",
+    "versions": {
+      "python": "3.12.13",
+      "tabfm": "1.0.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3"
+    }
+  },
+  "results": {
+    "default": {
+      "metrics": {
+        "accuracy": 0.8040677966101695,
+        "roc_auc": 0.9112788138627729,
+        "log_loss": 0.5110219717025757
+      },
+      "fit_predict_s": 63.27194595336914
+    },
+    "ensemble": {
+      "metrics": {
+        "accuracy": 0.8033898305084746,
+        "roc_auc": 0.9123413531733484,
+        "log_loss": 0.5049361252499899
+      },
+      "fit_predict_s": 161.3302607536316
+    }
+  }
+}

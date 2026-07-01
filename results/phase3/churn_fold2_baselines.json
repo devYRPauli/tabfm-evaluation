@@ -1,0 +1,71 @@
+{
+  "provenance": {
+    "task_id": 363623,
+    "dataset": "churn",
+    "fold": 2,
+    "model_type": "classification",
+    "n_train": 3334,
+    "n_test": 1666,
+    "n_features": 19,
+    "seed": 0,
+    "versions": {
+      "python": "3.12.13",
+      "xgboost": "3.3.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    },
+    "tabpfn_versions": {
+      "python": "3.12.13",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    }
+  },
+  "results": {
+    "xgboost_light": {
+      "metrics": {
+        "accuracy": 0.9567827130852341,
+        "roc_auc": 0.9252271139063593,
+        "log_loss": 0.17607763409614563
+      },
+      "fit_predict_s": 0.22374510765075684
+    },
+    "xgboost_heavy": {
+      "metrics": {
+        "accuracy": 0.957983193277311,
+        "roc_auc": 0.9271153931932737,
+        "log_loss": 0.15515689551830292
+      },
+      "fit_predict_s": 3.3373000621795654
+    },
+    "random_forest": {
+      "metrics": {
+        "accuracy": 0.9489795918367347,
+        "roc_auc": 0.9279376124418276,
+        "log_loss": 0.19098994559485064
+      },
+      "fit_predict_s": 0.9626448154449463
+    },
+    "linear_floor": {
+      "metrics": {
+        "accuracy": 0.8577430972388955,
+        "roc_auc": 0.8098904203279956,
+        "log_loss": 0.3295086154948298
+      },
+      "fit_predict_s": 0.022179841995239258
+    },
+    "tabpfn": {
+      "metrics": {
+        "accuracy": 0.9741896758703481,
+        "roc_auc": 0.9468932601810964,
+        "log_loss": 0.1057993620634079
+      },
+      "fit_predict_s": 9.17772388458252
+    }
+  }
+}

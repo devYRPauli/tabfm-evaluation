@@ -1,0 +1,37 @@
+{
+  "provenance": {
+    "task_id": 363625,
+    "dataset": "concrete_compressive_strength",
+    "fold": 2,
+    "model_type": "regression",
+    "n_train": 687,
+    "n_test": 343,
+    "n_features": 8,
+    "seed": 0,
+    "jax_device": "cuda:0",
+    "versions": {
+      "python": "3.12.13",
+      "tabfm": "1.0.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3"
+    }
+  },
+  "results": {
+    "default": {
+      "metrics": {
+        "rmse": 3.74726578879414,
+        "r2": 0.9487483567511177
+      },
+      "fit_predict_s": 12.511574983596802
+    },
+    "ensemble": {
+      "metrics": {
+        "rmse": 3.6638439673055054,
+        "r2": 0.9510048898676569
+      },
+      "fit_predict_s": 34.667393922805786
+    }
+  }
+}

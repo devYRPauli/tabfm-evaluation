@@ -1,0 +1,71 @@
+{
+  "provenance": {
+    "task_id": 363621,
+    "dataset": "blood-transfusion-service-center",
+    "fold": 1,
+    "model_type": "classification",
+    "n_train": 499,
+    "n_test": 249,
+    "n_features": 4,
+    "seed": 0,
+    "versions": {
+      "python": "3.12.13",
+      "xgboost": "3.3.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    },
+    "tabpfn_versions": {
+      "python": "3.12.13",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    }
+  },
+  "results": {
+    "xgboost_light": {
+      "metrics": {
+        "accuracy": 0.7309236947791165,
+        "roc_auc": 0.6827386262265834,
+        "log_loss": 0.6647998094558716
+      },
+      "fit_predict_s": 0.20388007164001465
+    },
+    "xgboost_heavy": {
+      "metrics": {
+        "accuracy": 0.7911646586345381,
+        "roc_auc": 0.7629348795718109,
+        "log_loss": 0.4653094708919525
+      },
+      "fit_predict_s": 2.888032913208008
+    },
+    "random_forest": {
+      "metrics": {
+        "accuracy": 0.7469879518072289,
+        "roc_auc": 0.7084299732381802,
+        "log_loss": 0.6953456070554149
+      },
+      "fit_predict_s": 0.13817405700683594
+    },
+    "linear_floor": {
+      "metrics": {
+        "accuracy": 0.7630522088353414,
+        "roc_auc": 0.7735950044603034,
+        "log_loss": 0.4651145330041592
+      },
+      "fit_predict_s": 0.005619049072265625
+    },
+    "tabpfn": {
+      "metrics": {
+        "accuracy": 0.7951807228915663,
+        "roc_auc": 0.796342551293488,
+        "log_loss": 0.44282594323158264
+      },
+      "fit_predict_s": 3.213089942932129
+    }
+  }
+}

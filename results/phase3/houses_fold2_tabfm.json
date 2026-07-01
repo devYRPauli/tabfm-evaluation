@@ -1,0 +1,37 @@
+{
+  "provenance": {
+    "task_id": 363678,
+    "dataset": "houses",
+    "fold": 2,
+    "model_type": "regression",
+    "n_train": 13760,
+    "n_test": 6880,
+    "n_features": 8,
+    "seed": 0,
+    "jax_device": "cuda:0",
+    "versions": {
+      "python": "3.12.13",
+      "tabfm": "1.0.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3"
+    }
+  },
+  "results": {
+    "default": {
+      "metrics": {
+        "rmse": 0.18521585048168457,
+        "r2": 0.8948333889591786
+      },
+      "fit_predict_s": 436.9524829387665
+    },
+    "ensemble": {
+      "metrics": {
+        "rmse": 0.1855586831941935,
+        "r2": 0.8944437039214558
+      },
+      "fit_predict_s": 641.7861514091492
+    }
+  }
+}

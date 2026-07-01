@@ -1,0 +1,66 @@
+{
+  "provenance": {
+    "task_id": 363678,
+    "dataset": "houses",
+    "fold": 2,
+    "model_type": "regression",
+    "n_train": 13760,
+    "n_test": 6880,
+    "n_features": 8,
+    "seed": 0,
+    "versions": {
+      "python": "3.12.13",
+      "xgboost": "3.3.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    },
+    "tabpfn_versions": {
+      "python": "3.12.13",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    }
+  },
+  "results": {
+    "xgboost_light": {
+      "metrics": {
+        "rmse": 0.23173526898220756,
+        "r2": 0.8353711852590852
+      },
+      "fit_predict_s": 0.21931219100952148
+    },
+    "xgboost_heavy": {
+      "metrics": {
+        "rmse": 0.21973872565834665,
+        "r2": 0.8519750981054739
+      },
+      "fit_predict_s": 7.306487798690796
+    },
+    "random_forest": {
+      "metrics": {
+        "rmse": 0.22904474431614244,
+        "r2": 0.8391717854834501
+      },
+      "fit_predict_s": 9.51518702507019
+    },
+    "linear_floor": {
+      "metrics": {
+        "rmse": 0.3409587696379659,
+        "r2": 0.6436101644474699
+      },
+      "fit_predict_s": 0.008722305297851562
+    },
+    "tabpfn": {
+      "metrics": {
+        "rmse": 0.1948473848439033,
+        "r2": 0.8836113203849372
+      },
+      "fit_predict_s": 59.54620313644409
+    }
+  }
+}

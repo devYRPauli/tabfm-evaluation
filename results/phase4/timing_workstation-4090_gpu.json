@@ -1,0 +1,10 @@
+[
+  {"n_train": 100, "n_features": 20, "n_test": 100, "latency_s_median": 2.3216, "peak_gpu_mem_mib": 22752, "status": "ok"},
+  {"n_train": 500, "n_features": 20, "n_test": 100, "latency_s_median": 3.1526, "peak_gpu_mem_mib": 22754, "status": "ok"},
+  {"n_train": 1000, "n_features": 20, "n_test": 100, "latency_s_median": 4.5987, "peak_gpu_mem_mib": 22754, "status": "ok"},
+  {"n_train": 2000, "n_features": 20, "n_test": 100, "latency_s_median": 8.9145, "peak_gpu_mem_mib": 22756, "status": "ok"},
+  {"n_train": 5000, "n_features": 20, "n_test": 100, "latency_s_median": 31.0880, "peak_gpu_mem_mib": 22756, "status": "ok"},
+  {"n_train": 10000, "n_features": 20, "n_test": 100, "latency_s_median": 105.6849, "peak_gpu_mem_mib": 22779, "status": "ok"},
+  {"n_train": 20000, "n_features": 20, "n_test": 100, "latency_s_median": null, "peak_gpu_mem_mib": null, "status": "OOM (>24GB)"},
+  {"_note": "reconstructed from phase4_ctx.log; the harness reported writing this file but it was absent on disk at verification. Values are the logged medians. largest n_train that fit = 10000."}
+]

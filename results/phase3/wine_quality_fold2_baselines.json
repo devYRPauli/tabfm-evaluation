@@ -1,0 +1,66 @@
+{
+  "provenance": {
+    "task_id": 363708,
+    "dataset": "wine_quality",
+    "fold": 2,
+    "model_type": "regression",
+    "n_train": 4332,
+    "n_test": 2165,
+    "n_features": 12,
+    "seed": 0,
+    "versions": {
+      "python": "3.12.13",
+      "xgboost": "3.3.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    },
+    "tabpfn_versions": {
+      "python": "3.12.13",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    }
+  },
+  "results": {
+    "xgboost_light": {
+      "metrics": {
+        "rmse": 0.6439285697299264,
+        "r2": 0.4650300145149231
+      },
+      "fit_predict_s": 0.21582794189453125
+    },
+    "xgboost_heavy": {
+      "metrics": {
+        "rmse": 0.6134682631394252,
+        "r2": 0.5144452452659607
+      },
+      "fit_predict_s": 5.928246974945068
+    },
+    "random_forest": {
+      "metrics": {
+        "rmse": 0.6117328542240731,
+        "r2": 0.5171885052878376
+      },
+      "fit_predict_s": 2.9254350662231445
+    },
+    "linear_floor": {
+      "metrics": {
+        "rmse": 0.7315371176138797,
+        "r2": 0.30955876083011635
+      },
+      "fit_predict_s": 0.006453037261962891
+    },
+    "tabpfn": {
+      "metrics": {
+        "rmse": 0.5806379089727196,
+        "r2": 0.5650244951248169
+      },
+      "fit_predict_s": 16.162670135498047
+    }
+  }
+}

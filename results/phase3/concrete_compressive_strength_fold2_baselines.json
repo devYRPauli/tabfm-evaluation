@@ -1,0 +1,66 @@
+{
+  "provenance": {
+    "task_id": 363625,
+    "dataset": "concrete_compressive_strength",
+    "fold": 2,
+    "model_type": "regression",
+    "n_train": 687,
+    "n_test": 343,
+    "n_features": 8,
+    "seed": 0,
+    "versions": {
+      "python": "3.12.13",
+      "xgboost": "3.3.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    },
+    "tabpfn_versions": {
+      "python": "3.12.13",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    }
+  },
+  "results": {
+    "xgboost_light": {
+      "metrics": {
+        "rmse": 4.697202875491202,
+        "r2": 0.9194700490958685
+      },
+      "fit_predict_s": 0.20772886276245117
+    },
+    "xgboost_heavy": {
+      "metrics": {
+        "rmse": 4.235673230691615,
+        "r2": 0.9345177347589856
+      },
+      "fit_predict_s": 4.176275968551636
+    },
+    "random_forest": {
+      "metrics": {
+        "rmse": 4.856217154245658,
+        "r2": 0.9139254034690459
+      },
+      "fit_predict_s": 0.28615403175354004
+    },
+    "linear_floor": {
+      "metrics": {
+        "rmse": 10.613521710766955,
+        "r2": 0.5888523394646603
+      },
+      "fit_predict_s": 0.002849102020263672
+    },
+    "tabpfn": {
+      "metrics": {
+        "rmse": 3.7054301288442986,
+        "r2": 0.9498863477425885
+      },
+      "fit_predict_s": 3.097990036010742
+    }
+  }
+}

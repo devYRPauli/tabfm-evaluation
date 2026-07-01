@@ -1,0 +1,67 @@
+{
+  "provenance": {
+    "host_label": "macstudio",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "python": "3.12.13",
+    "backend": "jax",
+    "seed": 0,
+    "tabfm_version": "1.0.0"
+  },
+  "elapsed_s": 685.0122020244598,
+  "results": [
+    {
+      "name": "linearly separable accuracy",
+      "value": 0.99,
+      "ok": true,
+      "detail": "acc=0.990 (floor 0.80)"
+    },
+    {
+      "name": "XOR accuracy (interaction)",
+      "value": 1.0,
+      "ok": true,
+      "detail": "acc=1.000 (floor 0.65, chance=0.50)"
+    },
+    {
+      "name": "monotone regression R2",
+      "value": 0.9967526492479811,
+      "ok": true,
+      "detail": "R2=0.997 (floor 0.80)"
+    },
+    {
+      "name": "accuracy grows with context",
+      "value": [
+        {
+          "n_context": 10,
+          "acc": 0.69
+        },
+        {
+          "n_context": 50,
+          "acc": 0.83
+        },
+        {
+          "n_context": 200,
+          "acc": 0.95
+        },
+        {
+          "n_context": 800,
+          "acc": 0.98
+        }
+      ],
+      "ok": true,
+      "detail": "acc 0.690 at n=10 -> 0.980 at n=800"
+    },
+    {
+      "name": "row-permutation invariance (bulk)",
+      "value": 0.99,
+      "ok": true,
+      "detail": "99% points stable <0.05; max=4.999e-01; collapses>0.3=1 (BUG-4)"
+    },
+    {
+      "name": "column-permutation invariance (finding)",
+      "value": 0.04527413845062256,
+      "ok": true,
+      "detail": "max abs proba diff = 4.527e-02 (informational)"
+    }
+  ],
+  "overall_pass": true
+}

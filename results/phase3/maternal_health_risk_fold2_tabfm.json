@@ -1,0 +1,39 @@
+{
+  "provenance": {
+    "task_id": 363685,
+    "dataset": "maternal_health_risk",
+    "fold": 2,
+    "model_type": "classification",
+    "n_train": 676,
+    "n_test": 338,
+    "n_features": 6,
+    "seed": 0,
+    "jax_device": "cuda:0",
+    "versions": {
+      "python": "3.12.13",
+      "tabfm": "1.0.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3"
+    }
+  },
+  "results": {
+    "default": {
+      "metrics": {
+        "accuracy": 0.8402366863905325,
+        "roc_auc": 0.9611462777797545,
+        "log_loss": 0.3716519773006439
+      },
+      "fit_predict_s": 18.018037796020508
+    },
+    "ensemble": {
+      "metrics": {
+        "accuracy": 0.8461538461538461,
+        "roc_auc": 0.9605188916958353,
+        "log_loss": 0.3731864229299133
+      },
+      "fit_predict_s": 37.89614987373352
+    }
+  }
+}

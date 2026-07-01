@@ -1,0 +1,71 @@
+{
+  "provenance": {
+    "task_id": 363685,
+    "dataset": "maternal_health_risk",
+    "fold": 2,
+    "model_type": "classification",
+    "n_train": 676,
+    "n_test": 338,
+    "n_features": 6,
+    "seed": 0,
+    "versions": {
+      "python": "3.12.13",
+      "xgboost": "3.3.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    },
+    "tabpfn_versions": {
+      "python": "3.12.13",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    }
+  },
+  "results": {
+    "xgboost_light": {
+      "metrics": {
+        "accuracy": 0.8136094674556213,
+        "roc_auc": 0.9409956707007535,
+        "log_loss": 0.46414217352867126
+      },
+      "fit_predict_s": 0.5866479873657227
+    },
+    "xgboost_heavy": {
+      "metrics": {
+        "accuracy": 0.8195266272189349,
+        "roc_auc": 0.9451852773849888,
+        "log_loss": 0.5102430582046509
+      },
+      "fit_predict_s": 8.01172685623169
+    },
+    "random_forest": {
+      "metrics": {
+        "accuracy": 0.8313609467455622,
+        "roc_auc": 0.9407814927636192,
+        "log_loss": 0.6212681904039332
+      },
+      "fit_predict_s": 0.16049909591674805
+    },
+    "linear_floor": {
+      "metrics": {
+        "accuracy": 0.621301775147929,
+        "roc_auc": 0.7928420890028408,
+        "log_loss": 0.7826983824384263
+      },
+      "fit_predict_s": 0.0074350833892822266
+    },
+    "tabpfn": {
+      "metrics": {
+        "accuracy": 0.8431952662721893,
+        "roc_auc": 0.9535612859351451,
+        "log_loss": 0.3941987156867981
+      },
+      "fit_predict_s": 3.4632790088653564
+    }
+  }
+}
