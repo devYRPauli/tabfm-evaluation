@@ -25,28 +25,47 @@ Model under test: [`google/tabfm-1.0.0-jax`](https://huggingface.co/google/tabfm
 5. Four upstream bugs were found and documented for later PRs. See
    [docs/upstream-bugs.md](docs/upstream-bugs.md).
 
-## Repository structure
+## What this repository contains
 
-1. [`README.md`](README.md) - this document, the complete picture.
-2. [`docs/`](docs/) - findings and write-ups:
-   [phase0-findings.md](docs/phase0-findings.md) (weight format, API, license, hard caps),
-   [tabarena-tasks.md](docs/tabarena-tasks.md) (the benchmark task list and the chosen subset),
-   [phase4-results.md](docs/phase4-results.md) (hardware timing),
-   [upstream-bugs.md](docs/upstream-bugs.md) (the four bugs),
-   [multigpu-and-commit-pinning.md](docs/multigpu-and-commit-pinning.md),
-   [safety-and-resource-limits.md](docs/safety-and-resource-limits.md),
-   [progress.md](docs/progress.md) (per-phase status).
-3. [`harness/`](harness/) - all runnable code: the phase harnesses, the shared
-   metrics, the aggregator, and the orchestration and safety scripts (below).
-4. [`diagnostics/`](diagnostics/) - the controlled experiments used to root-cause the
-   bf16 permutation finding and to smoke-test TabPFN.
-5. [`results/`](results/) - raw per-run JSON for every phase, plus
-   [the fold-matched summary](results/phase3/SUMMARY.md).
-6. [`env/`](env/) - environment notes and the pinned locks
-   ([macOS arm64 CPU](env/lock-macos-arm64-cpu.txt),
-   [Linux x86_64 CUDA](env/lock-linux-x86_64-cuda.txt)).
-7. [`provenance/`](provenance/) - exact chip, OS, and versions for each of the three
-   machines.
+```
+README.md                          This document, the complete picture
+docs/                              Findings and write-ups
+    phase0-findings.md             Weight format resolved (JAX vs pytorch), API, license, hard caps
+    tabarena-tasks.md              The full 51-task TabArena suite and the 13-dataset subset used
+    phase4-results.md              Hardware timing: latency and memory vs context, CPU vs GPU
+    upstream-bugs.md               The four bugs found, with repros and proposed fixes
+    multigpu-and-commit-pinning.md Multi-GPU sharding crash analysis and the commit-pin decision
+    safety-and-resource-limits.md  The 16 GB OOM incident and the memory-safety layer built after it
+    progress.md                    Per-phase status log
+harness/                           All runnable code
+    phase1_conformance.py          Phase 1: sklearn conformance and determinism check
+    phase2_sanity.py               Phase 2: known-answer sanity layer (linsep, XOR, monotone, context)
+    phase3_metrics.py              Shared metric definitions used by every estimator
+    phase3_tabfm.py                Phase 3: TabFM default + ensemble on one OpenML task/fold
+    phase3_baselines.py            Phase 3: XGBoost, random forest, linear floor, TabPFN
+    tabpfn_backfill.py             TabPFN-only run that merges into existing baseline results
+    aggregate_phase3.py            Fold-matched aggregation into results/phase3/SUMMARY.md
+    phase4_timing.py               Phase 4: latency and peak memory vs context size
+    safe_run.sh                    Memory watchdog: kills a job before it can OOM the machine
+    sysmon.sh                      Lightweight health sampler (load, RAM, swap, disk)
+    phase3_driver.sh               Three-machine orchestration used for this run (not portable)
+    gapfill_ws.sh, gapfill_studio.sh, sweep_watcher.sh   Run-specific orchestration helpers
+diagnostics/                       Controlled experiments
+    bug4_row_permutation.py        Row-order sensitivity sweep (ensemble size, context size)
+    bug4_reconcile.py              Worst-point inspection that reconciled the 0.5 outlier
+    bug4_frequency.py              Frequency of the uniform-collapse across permutations
+    tabpfn_smoke.py                Isolated TabPFN authentication and run test
+results/                           Raw per-run JSON for every phase
+    phase1/, phase2/, phase4/      Conformance, sanity, and timing results
+    phase3/                        Per-dataset/fold TabFM and baseline results
+    phase3/SUMMARY.md              The fold-matched head-to-head summary
+env/                               Environment notes and pinned locks
+    README.md                      Why Google's requirements.txt is unsatisfiable on macOS, and our locks
+    lock-macos-arm64-cpu.txt       Full pinned lock for the Macs (JAX CPU)
+    lock-linux-x86_64-cuda.txt     Full pinned lock for the workstation (jax[cuda12])
+provenance/                        Exact chip, OS, and versions per machine
+    machine-macbookpro-m1pro.md, machine-macstudio-m4max.md, machine-workstation-4090x2.md
+```
 
 ## What TabFM is (verified from the code)
 
@@ -175,6 +194,25 @@ are not portable; use the per-dataset commands above on any single machine.
    SDSS17 (78k) and GiveMeSomeCredit (150k) (TabFM impractically slow, did not complete).
 3. The heavy XGBoost tuning occasionally underperformed the default on small folds
    (the RandomizedSearch overfit); this is reported as-is rather than tuned away.
+
+## Credits and acknowledgments
+
+This is an independent third-party evaluation. All credit for the model belongs to
+its authors.
+
+1. TabFM is by Google Research. It was introduced in the blog post "Introducing
+   TabFM: A zero-shot foundation model for tabular data" (June 30, 2026) by
+   Weihao Kong and Abhimanyu Das, Research Scientists at Google Research. Code:
+   [google-research/tabfm](https://github.com/google-research/tabfm). Weights:
+   [google/tabfm-1.0.0-jax and google/tabfm-1.0.0-pytorch](https://huggingface.co/google/tabfm-1.0.0-pytorch).
+2. The benchmark is [TabArena](https://github.com/autogluon/tabarena) (OpenML Study
+   457), curated by the TabArena team, built on [OpenML](https://www.openml.org).
+3. Baselines: [TabPFN](https://github.com/PriorLabs/TabPFN) by Prior Labs,
+   [XGBoost](https://github.com/dmlc/xgboost), and
+   [scikit-learn](https://scikit-learn.org). TabFM's own stack uses JAX and Flax.
+
+If any author or maintainer wants a correction to how their work is described here,
+please open an issue and it will be fixed.
 
 ## Licenses
 
