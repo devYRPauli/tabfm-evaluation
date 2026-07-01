@@ -11,10 +11,15 @@ Model under test: [`google/tabfm-1.0.0-jax`](https://huggingface.co/google/tabfm
 
 ## Key findings
 
-1. TabFM is a genuine small-to-mid-data champion. On the 9 fully-scored TabArena
-   datasets (a few hundred to ~50k rows) it beat every baseline, including heavily
-   tuned XGBoost, random forest, and TabPFN, on the primary metric. Ranking:
-   TabFM > TabPFN > tuned trees. See [results/phase3/SUMMARY.md](results/phase3/SUMMARY.md).
+1. TabFM is a strong small-to-mid-data model. On the datasets it fully completed (a
+   few hundred to ~50k rows) it matched or beat every baseline on the primary metric,
+   zero-shot. It is clearly ahead of the tuned trees; against TabPFN it is even, with
+   margins (for example 0.891 vs 0.889) too small to separate from run variance at a
+   single seed. Two caveats being closed: a multi-seed noise characterization and a
+   stronger (Optuna) tree baseline are in progress. And this win rate is measured on
+   the subset where TabFM was always most likely to win, since the harder datasets
+   self-selected out by failing or timing out (see below). See
+   [results/phase3/SUMMARY.md](results/phase3/SUMMARY.md).
 2. It does not generalize to every table. It failed outright on high-dimensional
    data (Bioresponse, 1777 features) where the baselines worked.
 3. It is impractical at scale. A 24 GB GPU OOMs past ~10k in-context rows, and on
@@ -122,11 +127,16 @@ over context rows (row order changes predictions only at bf16 numerical scale, s
 [BUG-4](docs/upstream-bugs.md)).
 
 ### Phase 3: TabArena benchmark ([results/phase3/SUMMARY.md](results/phase3/SUMMARY.md))
-Fold-matched (TabFM and baselines compared only over folds where both exist). TabFM
-won all 9 fully-scored datasets and the one fold-matched diamonds comparison. Its edge
-over the tuned trees is clear (churn 0.979 vs 0.956 XGBoost, maternal 0.877 vs 0.842
-random forest); its edge over TabPFN is consistent but thin (MIC 0.891 vs 0.889,
-concrete R2 0.950 vs 0.949).
+Fold-matched (TabFM and baselines compared only over folds where both exist). Across
+the fully-scored datasets, TabFM matched or beat every baseline on the primary metric.
+Its edge over the tuned trees is clear (churn 0.979 vs 0.956 XGBoost, maternal 0.877 vs
+0.842 random forest). Its edge over TabPFN is directionally consistent but within
+single-seed run variance (MIC 0.891 vs 0.889, concrete R2 0.950 vs 0.949), so it should
+not be read as a strict ranking yet. Caveat on the tree baseline: the "heavy" XGBoost is
+a RandomizedSearch that sometimes overfit small folds, so "beats tuned trees" currently
+means "beats this tuning budget"; an Optuna baseline is in progress. Two comparisons are
+weak points, not clean wins: diamonds is a single fold-matched fold, and
+maternal_health_risk mixes a CPU fold0 with GPU folds 1-2.
 
 ### Phase 4: hardware characterization ([docs/phase4-results.md](docs/phase4-results.md), [results/phase4/](results/phase4/))
 Single-predict latency vs in-context rows (32-member ensemble, 20 features):
@@ -149,10 +159,12 @@ faster than CPU where it fits; there is no speed crossover, only a memory ceilin
 
 ## Conclusions
 
-The "small-data champion" framing holds and is sharpened. TabFM is an excellent,
-tuning-free default for small-to-mid tabular problems (it beat tuned trees and TabPFN
-on every dataset it completed), but it is not a drop-in for large or high-dimensional
-data: it fails on very wide tables and becomes impractically slow past ~10k rows.
+TabFM is a strong, tuning-free default for small-to-mid tabular problems: on the
+datasets it completed it matched or beat tuned trees and TabPFN. It is not a drop-in for
+large or high-dimensional data: it fails on very wide tables and becomes impractically
+slow past ~10k rows. The "small-data champion" framing holds; a strict model-vs-model
+ranking against TabPFN does not yet, pending multi-seed noise characterization and a
+stronger tree baseline.
 
 ## Bugs found
 
