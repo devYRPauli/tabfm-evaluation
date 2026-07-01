@@ -1,7 +1,7 @@
 #!/bin/bash
 # Waits for the Phase 3 sweep tmux session to finish, then aggregates the results
 # and fires a macOS desktop notification with the headline. Runs independently of
-# any Claude session (launch it in its own tmux). Also writes a DONE_headline.txt.
+# the launching shell (launch it in its own tmux). Also writes a DONE_headline.txt.
 set -u
 REPO="/Users/yashrajpandey/tabfm-evaluation"
 

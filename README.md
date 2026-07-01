@@ -105,11 +105,32 @@ drop-in for large or high-dimensional data.
 
 ## Reproduce
 
-Environments and per-machine setup: env/README.md. Then, per phase:
+Environment setup and the pinned locks (macOS-arm64-cpu and linux-x86_64-cuda) are
+in env/. Everything is seeded (SEED=0), pinned to commit b6ea70b, and the results
+JSONs are committed under results/.
+
+Single-machine reproduction (portable, one box with the JAX env and, for baselines,
+the baselines venv):
 1. Phase 1: `python harness/phase1_conformance.py`
 2. Phase 2: `python harness/phase2_sanity.py`
-3. Phase 3: `bash harness/phase3_driver.sh` (resumable; TabFM on GPU with CPU
-   fallback, baselines on CPU)
+3. Phase 3 per dataset (task ids in docs/tabarena-tasks.md), for fold in 0 1 2:
+   `python harness/phase3_tabfm.py <task_id> <fold> <name> <classification|regression>`
+   `python harness/phase3_baselines.py <task_id> <fold> <name> <type>`
+   (TabPFN backfill: `RUN_TABPFN=1 python harness/tabpfn_backfill.py ...`, foreground.)
 4. Aggregate: `python harness/aggregate_phase3.py` -> results/phase3/SUMMARY.md
+5. Phase 4 timing: `python harness/phase4_timing.py` (set CONTEXT_SIZES, N_FEATURES).
 
-All runs are seeded (SEED=0) and reproducible from the pinned lock.
+Note: `harness/phase3_driver.sh` and the `gapfill_*.sh` scripts are the specific
+3-machine orchestration used for this run (they hardcode the `macstudio`/`ubuntu`
+SSH aliases and route TabFM to the GPU with CPU fallback). They are not portable;
+use the per-dataset commands above to reproduce on any single machine.
+
+## Coverage and limitations (honest)
+
+1. 9 of 13 target datasets are fully scored (3 folds, TabFM and all baselines on the
+   same device, cuda:0). diamonds has 1 fold-matched comparison. maternal_health_risk
+   fold0 ran on CPU while folds 1-2 ran on GPU (bf16 cross-device differences are
+   ~1 sample; see BUG-4).
+2. Not scored: Bioresponse (TabFM failed, high-dim), SDSS17 (78k) and GiveMeSomeCredit
+   (150k) (TabFM impractically slow, did not complete). These are reported as findings,
+   not hidden.

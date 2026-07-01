@@ -7,3 +7,6 @@ __pycache__/
 weights/
 *.egg-info/
 results/**/raw_logs/
+*.log
+DONE_headline.txt
+*.out
