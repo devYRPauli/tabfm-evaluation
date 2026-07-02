@@ -1,0 +1,39 @@
+{
+  "provenance": {
+    "task_id": 363621,
+    "dataset": "blood-transfusion-service-center",
+    "fold": 2,
+    "model_type": "classification",
+    "n_train": 499,
+    "n_test": 249,
+    "n_features": 4,
+    "seed": 1,
+    "jax_device": "cuda:0",
+    "versions": {
+      "python": "3.12.13",
+      "tabfm": "1.0.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3"
+    }
+  },
+  "results": {
+    "default": {
+      "metrics": {
+        "accuracy": 0.8032128514056225,
+        "roc_auc": 0.7207404103479037,
+        "log_loss": 0.49110162258148193
+      },
+      "fit_predict_s": 15.882187604904175
+    },
+    "ensemble": {
+      "metrics": {
+        "accuracy": 0.7991967871485943,
+        "roc_auc": 0.7265388046387153,
+        "log_loss": 0.4847179352072743
+      },
+      "fit_predict_s": 32.313005208969116
+    }
+  }
+}

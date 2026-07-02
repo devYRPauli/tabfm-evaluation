@@ -17,11 +17,17 @@ Model under test: [`google/tabfm-1.0.0-jax`](https://huggingface.co/google/tabfm
    against an Optuna-tuned XGBoost (100 trials, 3-fold inner CV) it wins all 10
    fold-matched datasets, with margins from +0.013 to +0.055 on the primary metric
    on 8 of them (for example maternal_health_risk 0.877 vs 0.821, houses R2 0.898 vs
-   0.856). On the other two the margin is inside single-seed noise and is not claimed
+   0.856). On the other two the margin is razor-thin and not claimed as a robust win
    (MIC +0.001, diamonds +0.002). Against TabPFN it is even, with margins (for example
-   0.891 vs 0.889) too small to separate from run variance at a single seed. One caveat
-   still open: a multi-seed noise characterization (blocked on GPU access). And this win
-   rate is measured on the subset where TabFM was always most likely to win, since the
+   0.891 vs 0.889) too small to separate cleanly. A multi-seed check (seeds 0/1/2 on
+   MIC, concrete, blood-transfusion) shows TabFM's own run-to-run variance is very small
+   (seed-std <= 0.0006 on the primary metric, several folds bit-identical), so the thin
+   margins are not a TabFM-noise artifact: TabFM sits stably where it sits. But the
+   sub-0.005 margins (MIC, concrete) are still within test-set granularity and the
+   baselines' own (uncharacterized) run variance, so they are not called clean wins;
+   blood-transfusion (+0.008 over TabPFN) is comfortably outside that noise (see
+   [results/phase3_seeds/SEED_VARIANCE.md](results/phase3_seeds/SEED_VARIANCE.md)). And
+   this win rate is measured on the subset where TabFM was always most likely to win, since the
    harder datasets self-selected out by failing or timing out (see below). See
    [results/phase3/SUMMARY.md](results/phase3/SUMMARY.md).
 2. It does not generalize to every table. It failed outright on high-dimensional
