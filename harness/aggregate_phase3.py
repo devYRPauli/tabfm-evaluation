@@ -135,7 +135,12 @@ def main():
     headline = ("TabFM sweep: won %d, lost %d, tied %d of %d fold-matched datasets; "
                 "%d datasets unscored (coverage gaps). See results/phase3/SUMMARY.md"
                 % (tabfm_win, tabfm_loss, tabfm_tie, total, len(gaps)))
-    lines += ["## Headline", "", headline, ""]
+    caveat = ("Note: this tally counts any nonzero margin on the primary metric as a "
+              "decision. On a noise-aware reading the sub-0.005 margins (MIC, diamonds) "
+              "are within seed/run variance and test-set granularity and should be read "
+              "as ties, not wins (see results/phase3_seeds/SEED_VARIANCE.md); this does "
+              "not change the direction of any result.")
+    lines += ["## Headline", "", headline, "", caveat, ""]
 
     with open(os.path.join(RES, "SUMMARY.md"), "w") as fh:
         fh.write("\n".join(lines))

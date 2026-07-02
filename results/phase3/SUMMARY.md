@@ -33,3 +33,5 @@ primary metric (accuracy for classification, R2 for regression).
 ## Headline
 
 TabFM sweep: won 10, lost 0, tied 0 of 10 fold-matched datasets; 3 datasets unscored (coverage gaps). See results/phase3/SUMMARY.md
+
+Note: this tally counts any nonzero margin on the primary metric as a decision. On a noise-aware reading the sub-0.005 margins (MIC, diamonds) are within seed/run variance and test-set granularity and should be read as ties, not wins (see results/phase3_seeds/SEED_VARIANCE.md); this does not change the direction of any result.
