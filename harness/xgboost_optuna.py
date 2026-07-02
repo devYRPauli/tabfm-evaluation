@@ -31,7 +31,7 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import phase3_metrics as pm  # noqa: E402
 
-SEED = 0
+SEED = int(os.environ.get("SEED", "0"))
 N_TRIALS = int(os.environ.get("N_TRIALS", "100"))
 INNER_CV = int(os.environ.get("INNER_CV", "3"))
 optuna.logging.set_verbosity(optuna.logging.WARNING)
@@ -123,8 +123,9 @@ def main():
         metrics = pm.regression_metrics(np.asarray(y_te), pred)
     elapsed = time.time() - t0
 
-    out_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                           "results", "phase3")
+    out_dir = os.environ.get("PHASE3_OUT_DIR") or os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "results", "phase3")
     path = os.path.join(out_dir, "%s_fold%d_baselines.json" % (dataset, fold))
     if os.path.exists(path):
         d = json.load(open(path))

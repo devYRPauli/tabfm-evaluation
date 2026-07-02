@@ -40,7 +40,7 @@ import phase3_metrics as pm  # noqa: E402
 import tabfm  # noqa: E402
 from tabfm import TabFMClassifier, TabFMRegressor  # noqa: E402
 
-SEED = 0
+SEED = int(os.environ.get("SEED", "0"))
 np.random.seed(SEED)
 
 
@@ -142,8 +142,9 @@ def main():
         "versions": versions(),
     }
 
-    out_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                            "results", "phase3")
+    out_dir = os.environ.get("PHASE3_OUT_DIR") or os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "results", "phase3")
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, "%s_fold%d_tabfm.json" % (dataset, fold))
     with open(out_path, "w") as fh:
