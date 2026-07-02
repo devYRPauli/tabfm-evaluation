@@ -18,17 +18,38 @@ Raw data in results/phase4/.
 | >10000 | OOM | exceeds 24 GB |
 
 Two findings:
-1. Reported peak GPU memory is flat at ~22.75 GB across all context sizes. CAVEAT:
-   this sweep did not set XLA_PYTHON_CLIENT_PREALLOCATE=false, and it reads
-   `nvidia-smi memory.used`, which reports the whole preallocated pool, not the live
-   working set. XLA preallocates a large fraction of the card by default, which by
-   itself produces a flat peak and a hard OOM once the working set exceeds the pool.
-   So the flat 22.75 GB is most likely an allocator artifact, NOT evidence that the
-   ensemble model fills the card. The OOM past ~10k rows is a real observed failure,
-   but the mechanism (true model footprint vs preallocated pool) is unresolved
-   pending a control run with preallocation disabled. This is why the 78k and 150k
-   datasets
-   fail on GPU and fall back to CPU.
+1. Reported peak GPU memory is flat at ~22.75 GB across all context sizes. This
+   original sweep did not set XLA_PYTHON_CLIENT_PREALLOCATE=false, so `nvidia-smi
+   memory.used` reported XLA's preallocated pool, not the live working set. A control
+   run with preallocation disabled (below) resolves the mechanism.
+
+   Control run, XLA_PYTHON_CLIENT_PREALLOCATE=false, same GPU (RTX 4090), on an
+   otherwise-empty card so memory.used reflects only this process:
+
+   | n_train | median latency | peak GPU mem (no prealloc) |
+   |---|---|---|
+   | 100 | 2.07 s | 16953 MiB |
+   | 500 | 2.88 s | 16955 MiB |
+   | 1000 | 4.36 s | 16955 MiB |
+   | 2000 | 8.87 s | 16957 MiB |
+   | 5000 | 31.60 s | 16957 MiB |
+   | 10000 | 107.29 s | 16957 MiB |
+
+   The result is nuanced, not a clean "it was all an artifact." With the pool
+   disabled the footprint drops to ~16.95 GB, so ~5.8 GB of the original 22.75 GB
+   was pure XLA preallocation padding (an artifact). But the remaining ~16.95 GB is
+   a real, large, and genuinely flat footprint: it grows only ~4 MiB from n=100 to
+   n=10000. So the flatness is real (the 32-member ensemble's fixed weight/compiled-
+   buffer cost dominates over the context-dependent activation memory at these
+   sizes), and the true model footprint is ~16.95 GB, not the reported 22.75 GB.
+   Latency is unchanged between the two runs (n=10000: 105.7 s vs 107.3 s),
+   confirming it is the same workload measured with a different allocator. The OOM
+   past ~10k rows is a real observed failure; since the working set is still flat at
+   ~16.95 GB at n=10000 (about 7 GB of headroom on a 24 GB card), the OOM is a sharp
+   context-activation increase somewhere past 10k, not the preallocated pool being
+   exceeded. The >10k points were not measured with prealloc off, so the exact
+   ceiling with the pool disabled is not characterized here. This large footprint is
+   why the 78k and 150k datasets fail on GPU and fall back to CPU.
 2. Latency is strongly super-linear in context: 100 rows is 2.3 s, 10000 rows is
    105.7 s (a 46x latency increase for 100x the context).
 

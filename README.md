@@ -156,12 +156,14 @@ Single-predict latency vs in-context rows (32-member ensemble, 20 features):
 | 10000 | 105.7 s | 22.78 GB | - |
 | >10000 | OOM | >24 GB | fits, slow |
 
-Reported peak memory was flat at ~22.75 GB, but this run did NOT disable XLA
-preallocation, so that figure most likely reflects XLA's preallocated pool rather
-than the model's true working set. The OOM past ~10k rows is real (the job fails);
-whether that limit is the model footprint or the preallocated pool being exceeded
-is not yet established. A control run with XLA_PYTHON_CLIENT_PREALLOCATE=false is
-pending. The GPU is ~15 to 25x
+Reported peak memory was flat at ~22.75 GB, but that run did NOT disable XLA
+preallocation, so the figure included XLA's preallocated pool. A control run with
+XLA_PYTHON_CLIENT_PREALLOCATE=false (see [docs/phase4-results.md](docs/phase4-results.md))
+resolves it: the true footprint is ~16.95 GB and still flat across n=100 to 10000
+(grows ~4 MiB). So ~5.8 GB of the 22.75 GB was pool padding, but the model itself
+has a large, flat ~16.95 GB footprint dominated by the 32-member ensemble's fixed
+cost. The OOM past ~10k rows is real; with ~7 GB of headroom still free at n=10000 it
+is a context-activation spike beyond 10k, not the pool. The GPU is ~15 to 25x
 faster than CPU where it fits; there is no speed crossover, only a memory ceiling.
 
 ## Conclusions

@@ -1,0 +1,50 @@
+[
+  {
+    "n_train": 100,
+    "n_features": 20,
+    "n_test": 100,
+    "latency_s_median": 2.070286482805386,
+    "peak_gpu_mem_mib": 16953,
+    "status": "ok"
+  },
+  {
+    "n_train": 500,
+    "n_features": 20,
+    "n_test": 100,
+    "latency_s_median": 2.8797921668738127,
+    "peak_gpu_mem_mib": 16955,
+    "status": "ok"
+  },
+  {
+    "n_train": 1000,
+    "n_features": 20,
+    "n_test": 100,
+    "latency_s_median": 4.364197675138712,
+    "peak_gpu_mem_mib": 16955,
+    "status": "ok"
+  },
+  {
+    "n_train": 2000,
+    "n_features": 20,
+    "n_test": 100,
+    "latency_s_median": 8.865705159958452,
+    "peak_gpu_mem_mib": 16957,
+    "status": "ok"
+  },
+  {
+    "n_train": 5000,
+    "n_features": 20,
+    "n_test": 100,
+    "latency_s_median": 31.595458860043436,
+    "peak_gpu_mem_mib": 16957,
+    "status": "ok"
+  },
+  {
+    "n_train": 10000,
+    "n_features": 20,
+    "n_test": 100,
+    "latency_s_median": 107.28874206682667,
+    "peak_gpu_mem_mib": 16957,
+    "status": "ok"
+  }
+]
