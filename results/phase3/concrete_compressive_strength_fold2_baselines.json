@@ -61,6 +61,27 @@
         "r2": 0.9498863477425885
       },
       "fit_predict_s": 3.097990036010742
+    },
+    "xgboost_optuna": {
+      "metrics": {
+        "rmse": 4.24261776450464,
+        "r2": 0.9343028378278547
+      },
+      "fit_predict_s": 452.99346590042114,
+      "n_trials": 100,
+      "inner_cv": 3,
+      "best_params": {
+        "n_estimators": 999,
+        "max_depth": 4,
+        "learning_rate": 0.030855622890561953,
+        "subsample": 0.5111261845211664,
+        "colsample_bytree": 0.6513848921509209,
+        "min_child_weight": 3,
+        "reg_alpha": 3.0882763920740216e-07,
+        "reg_lambda": 1.705971086117676e-07,
+        "gamma": 1.5158602178951182
+      },
+      "best_cv_score": -4.497488777174612
     }
   }
 }

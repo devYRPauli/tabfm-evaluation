@@ -13,12 +13,16 @@ Model under test: [`google/tabfm-1.0.0-jax`](https://huggingface.co/google/tabfm
 
 1. TabFM is a strong small-to-mid-data model. On the datasets it fully completed (a
    few hundred to ~50k rows) it matched or beat every baseline on the primary metric,
-   zero-shot. It is clearly ahead of the tuned trees; against TabPFN it is even, with
-   margins (for example 0.891 vs 0.889) too small to separate from run variance at a
-   single seed. Two caveats being closed: a multi-seed noise characterization and a
-   stronger (Optuna) tree baseline are in progress. And this win rate is measured on
-   the subset where TabFM was always most likely to win, since the harder datasets
-   self-selected out by failing or timing out (see below). See
+   zero-shot. It stays ahead of the trees even after those trees are properly tuned:
+   against an Optuna-tuned XGBoost (100 trials, 3-fold inner CV) it wins all 10
+   fold-matched datasets, with margins from +0.013 to +0.055 on the primary metric
+   on 8 of them (for example maternal_health_risk 0.877 vs 0.821, houses R2 0.898 vs
+   0.856). On the other two the margin is inside single-seed noise and is not claimed
+   (MIC +0.001, diamonds +0.002). Against TabPFN it is even, with margins (for example
+   0.891 vs 0.889) too small to separate from run variance at a single seed. One caveat
+   still open: a multi-seed noise characterization (blocked on GPU access). And this win
+   rate is measured on the subset where TabFM was always most likely to win, since the
+   harder datasets self-selected out by failing or timing out (see below). See
    [results/phase3/SUMMARY.md](results/phase3/SUMMARY.md).
 2. It does not generalize to every table. It failed outright on high-dimensional
    data (Bioresponse, 1777 features) where the baselines worked.
@@ -132,11 +136,14 @@ the fully-scored datasets, TabFM matched or beat every baseline on the primary m
 Its edge over the tuned trees is clear (churn 0.979 vs 0.956 XGBoost, maternal 0.877 vs
 0.842 random forest). Its edge over TabPFN is directionally consistent but within
 single-seed run variance (MIC 0.891 vs 0.889, concrete R2 0.950 vs 0.949), so it should
-not be read as a strict ranking yet. Caveat on the tree baseline: the "heavy" XGBoost is
-a RandomizedSearch that sometimes overfit small folds, so "beats tuned trees" currently
-means "beats this tuning budget"; an Optuna baseline is in progress. Two comparisons are
-weak points, not clean wins: diamonds is a single fold-matched fold, and
-maternal_health_risk mixes a CPU fold0 with GPU folds 1-2.
+not be read as a strict ranking yet. The tree baseline was strengthened: beyond the
+"heavy" RandomizedSearch XGBoost, an Optuna-tuned XGBoost (100 trials, 3-fold inner CV)
+was run on all 10 fold-matched datasets, and TabFM beat it on every one. On 8 the margin
+is +0.013 to +0.055 (maternal 0.877 vs 0.821, houses R2 0.898 vs 0.856); on 2 it is
+inside single-seed noise and is not claimed (MIC +0.001, diamonds +0.002). So "beats
+tuned trees" now holds against a real tuning budget, not just the light presets. Two
+comparisons remain weak points, not clean wins: diamonds is only two fold-matched folds,
+and maternal_health_risk mixes a CPU fold0 with GPU folds 1-2.
 
 ### Phase 4: hardware characterization ([docs/phase4-results.md](docs/phase4-results.md), [results/phase4/](results/phase4/))
 Single-predict latency vs in-context rows (32-member ensemble, 20 features):

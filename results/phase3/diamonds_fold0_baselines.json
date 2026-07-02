@@ -50,6 +50,27 @@
     "tabpfn": {
       "status": "unavailable",
       "reason": "skipped: RUN_TABPFN!=1. TabPFN hangs on a C-level network call when backgrounded in the batch sweep (signal timeout cannot interrupt it); run as a separate TTY pass to backfill."
+    },
+    "xgboost_optuna": {
+      "metrics": {
+        "rmse": 532.9034856331867,
+        "r2": 0.9826677441596985
+      },
+      "fit_predict_s": 427.6591999530792,
+      "n_trials": 100,
+      "inner_cv": 3,
+      "best_params": {
+        "n_estimators": 569,
+        "max_depth": 8,
+        "learning_rate": 0.02267338798310231,
+        "subsample": 0.7249361999505289,
+        "colsample_bytree": 0.8152675840929627,
+        "min_child_weight": 2,
+        "reg_alpha": 1.751753364748261e-07,
+        "reg_lambda": 7.615921499345929e-08,
+        "gamma": 4.413112821531004
+      },
+      "best_cv_score": -558.0029429752163
     }
   }
 }

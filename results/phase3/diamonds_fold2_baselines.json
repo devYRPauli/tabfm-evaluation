@@ -1,0 +1,32 @@
+{
+  "provenance": {
+    "task_id": 363631,
+    "dataset": "diamonds",
+    "fold": 2,
+    "model_type": "regression",
+    "seed": 0
+  },
+  "results": {
+    "xgboost_optuna": {
+      "metrics": {
+        "rmse": 528.2557974125792,
+        "r2": 0.9820571541786194
+      },
+      "fit_predict_s": 476.9779591560364,
+      "n_trials": 100,
+      "inner_cv": 3,
+      "best_params": {
+        "n_estimators": 915,
+        "max_depth": 9,
+        "learning_rate": 0.009299408413929308,
+        "subsample": 0.6358091987916408,
+        "colsample_bytree": 0.8737907108815699,
+        "min_child_weight": 2,
+        "reg_alpha": 0.0002803058196267159,
+        "reg_lambda": 1.0149403446732728e-08,
+        "gamma": 1.2171359339873255e-06
+      },
+      "best_cv_score": -547.5938131917391
+    }
+  }
+}

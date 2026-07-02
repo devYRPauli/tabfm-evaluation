@@ -8,7 +8,7 @@ primary metric (accuracy for classification, R2 for regression).
 
 | dataset | TabFM best | TabFM auc | baseline best | base auc | winner |
 |---|---|---|---|---|---|
-| MIC | ensemble 0.891 | 0.885 | tabpfn 0.889 | 0.869 | TabFM |
+| MIC | ensemble 0.891 | 0.885 | xgboost_optuna 0.890 | 0.853 | TabFM |
 | blood-transfusion-service-center | default 0.801 | 0.754 | tabpfn 0.793 | 0.751 | TabFM |
 | churn | default 0.979 | 0.934 | tabpfn 0.972 | 0.935 | TabFM |
 | credit-g | default 0.775 | 0.801 | random_forest 0.761 | 0.795 | TabFM |
@@ -20,7 +20,7 @@ primary metric (accuracy for classification, R2 for regression).
 | dataset | TabFM best | TabFM rmse | baseline best | base rmse | winner |
 |---|---|---|---|---|---|
 | concrete_compressive_strength | ensemble 0.950 | 3.721 | tabpfn 0.949 | 3.765 | TabFM |
-| diamonds | ensemble 0.985 | 497.998 | xgboost_heavy 0.982 | 537.168 | TabFM | (1 common fold(s))
+| diamonds | ensemble 0.985 | 497.001 | xgboost_heavy 0.982 | 537.168 | TabFM | (2 common fold(s))
 | houses | ensemble 0.898 | 0.181 | tabpfn 0.889 | 0.190 | TabFM |
 | wine_quality | default 0.548 | 0.587 | tabpfn 0.544 | 0.589 | TabFM |
 
