@@ -183,9 +183,12 @@ to 25x faster than CPU where it fits; there is no speed crossover, only a memory
 TabFM is a strong, tuning-free default for small-to-mid tabular problems: on the
 datasets it completed it matched or beat tuned trees and TabPFN. It is not a drop-in for
 large or high-dimensional data: it fails on very wide tables and becomes impractically
-slow past ~10k rows. The "small-data champion" framing holds; a strict model-vs-model
-ranking against TabPFN does not yet, pending multi-seed noise characterization and a
-stronger tree baseline.
+slow past ~10k rows. The "small-data champion" framing holds: against an Optuna-tuned
+XGBoost it wins every fold-matched dataset, and a two-sided multi-seed check confirms
+TabFM is the more stable model (lower run variance than the trees). A strict
+model-vs-model ranking against TabPFN still does not hold: on the thinnest datasets the
+margins are within a few thousandths and, for TabPFN specifically, its own seed variance
+could not be measured (network hang), so those are reported as ties, not wins.
 
 ## Bugs found
 
