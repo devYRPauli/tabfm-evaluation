@@ -21,7 +21,7 @@ commit 5ee6cd7, together with BUG-2). Verified still
 present at current main; reproduced on simulated CPU devices
 (XLA_FLAGS=--xla_force_host_platform_device_count=2), fixed by removing the
 first-compile override that rebuilt data_sharding over all jax.devices(), with a
-CI regression test. Awaiting review + CLA.
+CI regression test. Approved by weihaokong (TabFM co-author) and merged.
 Severity: High. Any user with two or more visible GPUs hits this on the very first
 `predict` / `predict_proba` call with default settings.
 
