@@ -16,7 +16,8 @@ filing), VERIFIED (repro reduced and dupe-checked), FILED (PR open).
 
 ## BUG-1: Default predict on a multi-GPU host crashes (IndivisibleError)
 
-Status: FILED (google-research/tabfm PR #42, together with BUG-2). Verified still
+Status: MERGED (google-research/tabfm PR #42, merged 2026-07-03 by weihaokong,
+commit 5ee6cd7, together with BUG-2). Verified still
 present at current main; reproduced on simulated CPU devices
 (XLA_FLAGS=--xla_force_host_platform_device_count=2), fixed by removing the
 first-compile override that rebuilt data_sharding over all jax.devices(), with a
@@ -55,7 +56,7 @@ Next step: reduce to a minimal standalone repro (load model, tiny fit, predict o
 
 ## BUG-2: Multi-GPU with batch_size=32 fails on weight placement (device mismatch)
 
-Status: FILED (google-research/tabfm PR #42, same fix as BUG-1: the removed
+Status: MERGED (google-research/tabfm PR #42, merged by weihaokong; same fix as BUG-1: the removed
 override caused both the batch=1 indivisibility and the params-on-device-0 vs
 inputs-on-all-devices mismatch)
 Severity: High, and it blocks the natural workaround for BUG-1. Likely the same

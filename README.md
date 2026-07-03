@@ -41,8 +41,8 @@ Model under test: [`google/tabfm-1.0.0-jax`](https://huggingface.co/google/tabfm
    context. See [docs/phase4-results.md](docs/phase4-results.md).
 4. It is 15 to 40x slower than the trees even where it wins. The value is zero-shot
    convenience and accuracy on small-to-mid tables, not speed.
-5. Four upstream bugs were found. The multi-GPU predict crash was fixed upstream in
-   [google-research/tabfm#42](https://github.com/google-research/tabfm/pull/42); the
+5. Four upstream bugs were found. The multi-GPU predict crash fix was merged upstream
+   ([google-research/tabfm#42](https://github.com/google-research/tabfm/pull/42)); the
    others were fixed independently upstream or characterized. See
    [docs/upstream-bugs.md](docs/upstream-bugs.md).
 
@@ -206,9 +206,9 @@ Logged in [docs/upstream-bugs.md](docs/upstream-bugs.md); each was re-verified a
 current upstream main and dupe-checked before acting.
 
 1. BUG-1 / BUG-2: multi-GPU sharding crashes through the public predict path; only a
-   single GPU is usable out of the box. Root-caused and fixed upstream in
-   [google-research/tabfm#42](https://github.com/google-research/tabfm/pull/42),
-   with a CPU-simulated regression test.
+   single GPU is usable out of the box. Root-caused and fixed; the fix (with a
+   CPU-simulated regression test) was merged upstream as
+   [google-research/tabfm#42](https://github.com/google-research/tabfm/pull/42).
 2. BUG-3: `predict` returned a dtype=object array, which sklearn metrics reject.
    Independently fixed upstream (tabfm PR #28) after our pinned commit, so not filed.
 3. BUG-4: predictions are not exactly invariant to context row order in bfloat16 (a
