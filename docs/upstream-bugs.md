@@ -16,7 +16,11 @@ filing), VERIFIED (repro reduced and dupe-checked), FILED (PR open).
 
 ## BUG-1: Default predict on a multi-GPU host crashes (IndivisibleError)
 
-Status: CANDIDATE
+Status: FILED (google-research/tabfm PR #42, together with BUG-2). Verified still
+present at current main; reproduced on simulated CPU devices
+(XLA_FLAGS=--xla_force_host_platform_device_count=2), fixed by removing the
+first-compile override that rebuilt data_sharding over all jax.devices(), with a
+CI regression test. Awaiting review + CLA.
 Severity: High. Any user with two or more visible GPUs hits this on the very first
 `predict` / `predict_proba` call with default settings.
 
@@ -51,7 +55,9 @@ Next step: reduce to a minimal standalone repro (load model, tiny fit, predict o
 
 ## BUG-2: Multi-GPU with batch_size=32 fails on weight placement (device mismatch)
 
-Status: CANDIDATE
+Status: FILED (google-research/tabfm PR #42, same fix as BUG-1: the removed
+override caused both the batch=1 indivisibility and the params-on-device-0 vs
+inputs-on-all-devices mismatch)
 Severity: High, and it blocks the natural workaround for BUG-1. Likely the same
 root subsystem.
 
@@ -88,7 +94,9 @@ single-4090 (CUDA_VISIBLE_DEVICES=0), which works correctly.
 
 ## BUG-3: predict returns a dtype=object array, breaking sklearn metrics
 
-Status: CANDIDATE
+Status: ALREADY FIXED UPSTREAM (commit 2efc01b, "Fix TabFMClassifier.predict()
+returning object-dtype labels"), between the pinned b6ea70b and current main. The
+fix is the exact astype(self.classes_.dtype) cast proposed here. Not filed (moot)
 Severity: Low to Medium. The class advertises a scikit-learn compatible API, but
 `predict` output is rejected by standard sklearn metrics.
 
