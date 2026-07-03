@@ -192,14 +192,18 @@ could not be measured (network hang), so those are reported as ties, not wins.
 
 ## Bugs found
 
-Logged in [docs/upstream-bugs.md](docs/upstream-bugs.md) (pending independent
-verification and duplicate checks before filing):
+Logged in [docs/upstream-bugs.md](docs/upstream-bugs.md); each was re-verified at
+current upstream main and dupe-checked before acting.
 
 1. BUG-1 / BUG-2: multi-GPU sharding crashes through the public predict path; only a
-   single GPU is usable out of the box.
-2. BUG-3: `predict` returns a dtype=object array, which sklearn metrics reject.
+   single GPU is usable out of the box. Root-caused and fixed upstream in
+   [google-research/tabfm#42](https://github.com/google-research/tabfm/pull/42),
+   with a CPU-simulated regression test.
+2. BUG-3: `predict` returned a dtype=object array, which sklearn metrics reject.
+   Independently fixed upstream (tabfm PR #28) after our pinned commit, so not filed.
 3. BUG-4: predictions are not exactly invariant to context row order in bfloat16 (a
-   numerical-precision matter; architecturally the model is invariant).
+   numerical-precision matter; architecturally the model is invariant). Characterized,
+   not filed.
 
 ## Reproducibility
 
