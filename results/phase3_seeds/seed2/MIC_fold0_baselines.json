@@ -1,0 +1,81 @@
+{
+  "provenance": {
+    "task_id": 363711,
+    "dataset": "MIC",
+    "fold": 0,
+    "model_type": "classification",
+    "n_train": 1132,
+    "n_test": 567,
+    "n_features": 111,
+    "seed": 2,
+    "versions": {
+      "python": "3.12.13",
+      "xgboost": "3.3.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    }
+  },
+  "results": {
+    "xgboost_light": {
+      "metrics": {
+        "accuracy": 0.8835978835978836,
+        "roc_auc": 0.8361346504662748,
+        "log_loss": 0.6759588122367859
+      },
+      "fit_predict_s": 1.134047031402588
+    },
+    "xgboost_heavy": {
+      "metrics": {
+        "accuracy": 0.8835978835978836,
+        "roc_auc": 0.8344140623062335,
+        "log_loss": 0.5042468905448914
+      },
+      "fit_predict_s": 12.183874130249023
+    },
+    "random_forest": {
+      "metrics": {
+        "accuracy": 0.8783068783068783,
+        "roc_auc": 0.8405890237323443,
+        "log_loss": 0.7001568982112626
+      },
+      "fit_predict_s": 0.367764949798584
+    },
+    "linear_floor": {
+      "metrics": {
+        "accuracy": 0.8659611992945326,
+        "roc_auc": 0.8087110238880526,
+        "log_loss": 0.6355285094019512
+      },
+      "fit_predict_s": 0.09231877326965332
+    },
+    "tabpfn": {
+      "status": "unavailable",
+      "reason": "skipped: RUN_TABPFN!=1. TabPFN hangs on a C-level network call when backgrounded in the batch sweep (signal timeout cannot interrupt it); run as a separate TTY pass to backfill."
+    },
+    "xgboost_optuna": {
+      "metrics": {
+        "accuracy": 0.8818342151675485,
+        "roc_auc": 0.8426820700013501,
+        "log_loss": 0.4966193437576294
+      },
+      "fit_predict_s": 1168.3059759140015,
+      "n_trials": 100,
+      "inner_cv": 3,
+      "best_params": {
+        "n_estimators": 923,
+        "max_depth": 7,
+        "learning_rate": 0.03184157117370914,
+        "subsample": 0.9531636187790695,
+        "colsample_bytree": 0.5742451434766773,
+        "min_child_weight": 3,
+        "reg_alpha": 2.702061126796419,
+        "reg_lambda": 3.0872314187790834e-05,
+        "gamma": 1.488519839197327e-08
+      },
+      "best_cv_score": -0.445942501227061
+    }
+  }
+}

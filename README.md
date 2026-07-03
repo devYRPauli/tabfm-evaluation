@@ -19,13 +19,17 @@ Model under test: [`google/tabfm-1.0.0-jax`](https://huggingface.co/google/tabfm
    on 8 of them (for example maternal_health_risk 0.877 vs 0.821, houses R2 0.898 vs
    0.856). On the other two the margin is razor-thin and not claimed as a robust win
    (MIC +0.001, diamonds +0.002). Against TabPFN it is even, with margins (for example
-   0.891 vs 0.889) too small to separate cleanly. A multi-seed check (seeds 0/1/2 on
-   MIC, concrete, blood-transfusion) shows TabFM's own run-to-run variance is very small
-   (seed-std <= 0.0006 on the primary metric, several folds bit-identical), so the thin
-   margins are not a TabFM-noise artifact: TabFM sits stably where it sits. But the
-   sub-0.005 margins (MIC, concrete) are still within test-set granularity and the
-   baselines' own (uncharacterized) run variance, so they are not called clean wins;
-   blood-transfusion (+0.008 over TabPFN) is comfortably outside that noise (see
+   0.891 vs 0.889) too small to separate cleanly. A two-sided multi-seed check (seeds
+   0/1/2 for TabFM and the baselines on MIC, concrete, blood-transfusion) makes this
+   precise: TabFM's run-to-run variance is very small (std 0.0001-0.0006), smaller than
+   every tree baseline (xgboost_heavy up to 0.005), so the thin margins are not a
+   TabFM-noise artifact. Of the thin cases, concrete vs TabPFN (+0.0011) is a genuine
+   near-tie; MIC's margins (+0.0022 vs TabPFN, +0.0029 vs Optuna) are small in absolute
+   terms and only a few times the seed noise (too close to call a robust win, but not
+   losses); blood-transfusion (+0.0089 vs TabPFN) is comfortably outside the noise, a
+   real edge. One measurement gap: TabPFN seeds 1/2 could not be run (TabPFN hangs on a
+   C-level network call in this environment), so the two TabPFN margins rest on TabFM's
+   variance plus TabPFN's seed-0 point (see
    [results/phase3_seeds/SEED_VARIANCE.md](results/phase3_seeds/SEED_VARIANCE.md)). And
    this win rate is measured on the subset where TabFM was always most likely to win, since the
    harder datasets self-selected out by failing or timing out (see below). See
@@ -168,9 +172,11 @@ XLA_PYTHON_CLIENT_PREALLOCATE=false (see [docs/phase4-results.md](docs/phase4-re
 resolves it: the true footprint is ~16.95 GB and still flat across n=100 to 10000
 (grows ~4 MiB). So ~5.8 GB of the 22.75 GB was pool padding, but the model itself
 has a large, flat ~16.95 GB footprint dominated by the 32-member ensemble's fixed
-cost. The OOM past ~10k rows is real; with ~7 GB of headroom still free at n=10000 it
-is a context-activation spike beyond 10k, not the pool. The GPU is ~15 to 25x
-faster than CPU where it fits; there is no speed crossover, only a memory ceiling.
+cost. Extending the prealloc-off sweep, the footprint stays flat at ~16.95 GB and
+n=20000 now fits (it did not with prealloc on); n=30000 OOMs. So disabling
+preallocation roughly doubles the usable context ceiling on the 24 GB card (from ~10k
+to ~20k rows), and the original >10k OOM was the pool, not the model. The GPU is ~15
+to 25x faster than CPU where it fits; there is no speed crossover, only a memory ceiling.
 
 ## Conclusions
 

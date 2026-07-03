@@ -1,0 +1,59 @@
+{
+  "provenance": {
+    "task_id": 363621,
+    "dataset": "blood-transfusion-service-center",
+    "fold": 0,
+    "model_type": "classification",
+    "n_train": 498,
+    "n_test": 250,
+    "n_features": 4,
+    "seed": 1,
+    "versions": {
+      "python": "3.12.13",
+      "xgboost": "3.3.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    }
+  },
+  "results": {
+    "xgboost_light": {
+      "metrics": {
+        "accuracy": 0.772,
+        "roc_auc": 0.6493421052631579,
+        "log_loss": 0.733549952507019
+      },
+      "fit_predict_s": 0.20227289199829102
+    },
+    "xgboost_heavy": {
+      "metrics": {
+        "accuracy": 0.764,
+        "roc_auc": 0.6951754385964912,
+        "log_loss": 0.5017093420028687
+      },
+      "fit_predict_s": 2.7229318618774414
+    },
+    "random_forest": {
+      "metrics": {
+        "accuracy": 0.752,
+        "roc_auc": 0.6654824561403508,
+        "log_loss": 0.9829184122224723
+      },
+      "fit_predict_s": 0.14403820037841797
+    },
+    "linear_floor": {
+      "metrics": {
+        "accuracy": 0.776,
+        "roc_auc": 0.745,
+        "log_loss": 0.48220641648742285
+      },
+      "fit_predict_s": 0.007050991058349609
+    },
+    "tabpfn": {
+      "status": "unavailable",
+      "reason": "skipped: RUN_TABPFN!=1. TabPFN hangs on a C-level network call when backgrounded in the batch sweep (signal timeout cannot interrupt it); run as a separate TTY pass to backfill."
+    }
+  }
+}

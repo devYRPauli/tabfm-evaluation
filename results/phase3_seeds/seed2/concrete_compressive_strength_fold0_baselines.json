@@ -1,0 +1,55 @@
+{
+  "provenance": {
+    "task_id": 363625,
+    "dataset": "concrete_compressive_strength",
+    "fold": 0,
+    "model_type": "regression",
+    "n_train": 686,
+    "n_test": 344,
+    "n_features": 8,
+    "seed": 2,
+    "versions": {
+      "python": "3.12.13",
+      "xgboost": "3.3.0",
+      "openml": "0.15.1",
+      "scikit-learn": "1.9.0",
+      "numpy": "2.5.0",
+      "pandas": "3.0.3",
+      "tabpfn": "8.0.8"
+    }
+  },
+  "results": {
+    "xgboost_light": {
+      "metrics": {
+        "rmse": 4.796893832416572,
+        "r2": 0.9201814327451447
+      },
+      "fit_predict_s": 0.20511317253112793
+    },
+    "xgboost_heavy": {
+      "metrics": {
+        "rmse": 4.535009996757556,
+        "r2": 0.9286588324914792
+      },
+      "fit_predict_s": 3.590986967086792
+    },
+    "random_forest": {
+      "metrics": {
+        "rmse": 5.465826416305061,
+        "r2": 0.8963676407120281
+      },
+      "fit_predict_s": 0.2982039451599121
+    },
+    "linear_floor": {
+      "metrics": {
+        "rmse": 10.084021232933514,
+        "r2": 0.6472628368705031
+      },
+      "fit_predict_s": 0.0027780532836914062
+    },
+    "tabpfn": {
+      "status": "unavailable",
+      "reason": "skipped: RUN_TABPFN!=1. TabPFN hangs on a C-level network call when backgrounded in the batch sweep (signal timeout cannot interrupt it); run as a separate TTY pass to backfill."
+    }
+  }
+}

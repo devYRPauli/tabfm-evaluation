@@ -34,6 +34,10 @@ Two findings:
    | 2000 | 8.87 s | 16957 MiB |
    | 5000 | 31.60 s | 16957 MiB |
    | 10000 | 107.29 s | 16957 MiB |
+   | 12000 | 147.93 s | 16955 MiB |
+   | 15000 | 221.96 s | 16955 MiB |
+   | 20000 | 384.07 s | 16955 MiB |
+   | 30000 | OOM | (exceeds 24 GB) |
 
    The result is nuanced, not a clean "it was all an artifact." With the pool
    disabled the footprint drops to ~16.95 GB, so ~5.8 GB of the original 22.75 GB
@@ -44,12 +48,14 @@ Two findings:
    sizes), and the true model footprint is ~16.95 GB, not the reported 22.75 GB.
    Latency is unchanged between the two runs (n=10000: 105.7 s vs 107.3 s),
    confirming it is the same workload measured with a different allocator. The OOM
-   past ~10k rows is a real observed failure; since the working set is still flat at
-   ~16.95 GB at n=10000 (about 7 GB of headroom on a 24 GB card), the OOM is a sharp
-   context-activation increase somewhere past 10k, not the preallocated pool being
-   exceeded. The >10k points were not measured with prealloc off, so the exact
-   ceiling with the pool disabled is not characterized here. This large footprint is
-   why the 78k and 150k datasets fail on GPU and fall back to CPU.
+   original >10k OOM (with prealloc on) was the preallocated pool, not the model:
+   with the pool disabled the reported footprint stays flat at ~16.95 GB all the way
+   to n=20000, and n=20000 now fits (it did not with prealloc on). n=30000 OOMs. So
+   disabling preallocation roughly doubles the usable context ceiling on the 24 GB
+   card, from ~10k to ~20k rows. The footprint is flat right up to the ceiling, so the
+   OOM between 20k and 30k is a transient activation-memory spike during the forward
+   pass that exceeds 24 GB, not a gradual fill. Even so, ~16.95 GB is a large fixed
+   base, which is why the 78k and 150k datasets fail on GPU and fall back to CPU.
 2. Latency is strongly super-linear in context: 100 rows is 2.3 s, 10000 rows is
    105.7 s (a 46x latency increase for 100x the context).
 
