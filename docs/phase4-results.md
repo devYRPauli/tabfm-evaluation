@@ -66,19 +66,25 @@ features 7.1 s; at n=5000, 31.1 s vs 44.9 s.
 
 | n_train | median latency |
 |---|---|
-| 100 | 33.40 s |
-| 500 | 76.37 s |
-| 1000 | (computing) |
+| 100 | 32.53 s |
+| 500 | 78.60 s |
+| 1000 | 147.27 s |
+| 2000 | 346.04 s |
+| 5000 | 1299.22 s |
 
-(Larger CPU points still running; table to be completed. The CPU fits far more
-context than the GPU because of the 64 GB unified memory, but is much slower.)
+Latency is super-linear in context, more steeply than on GPU: 100 rows is 32.5 s,
+5000 rows is 1299 s (a 40x latency increase for 50x the context, and a single
+n=5000 predict is ~21 minutes). The CPU fits far more context than the GPU because
+of the 64 GB unified memory, but is much slower.
 
 ## CPU vs GPU
 
-The GPU is roughly 15 to 25x faster than the Studio CPU at these sizes (n=100:
-33.4 s CPU vs 2.3 s GPU = 14x; n=500: 76.4 s vs 3.15 s = 24x). But the GPU is
-capped at ~10k context by its 24 GB memory, while the CPU can hold 78k-150k
-context in 64 GB (or 128 GB on the workstation) at the cost of ~1 hour per fold.
+The GPU is roughly 14 to 42x faster than the Studio CPU, and the gap widens with
+context (n=100: 32.5 s CPU vs 2.3 s GPU = 14x; n=500: 78.6 s vs 3.15 s = 25x;
+n=1000: 147 s vs 4.6 s = 32x; n=2000: 346 s vs 8.9 s = 39x; n=5000: 1299 s vs
+31.1 s = 42x). But the GPU is capped by its 24 GB memory (~10k context with XLA
+preallocation on, ~20k with it disabled), while the CPU can hold 78k-150k context
+in 64 GB (or 128 GB on the workstation) at the cost of ~1 hour per fold.
 
 So the practical picture:
 1. Small-to-mid context (up to ~10k rows): use the GPU, seconds to ~2 minutes.
