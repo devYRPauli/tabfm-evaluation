@@ -41,7 +41,9 @@ Model under test: [`google/tabfm-1.0.0-jax`](https://huggingface.co/google/tabfm
    context. See [docs/phase4-results.md](docs/phase4-results.md).
 4. It is 15 to 40x slower than the trees even where it wins. The value is zero-shot
    convenience and accuracy on small-to-mid tables, not speed.
-5. Four upstream bugs were found and documented for later PRs. See
+5. Four upstream bugs were found. The multi-GPU predict crash was fixed upstream in
+   [google-research/tabfm#42](https://github.com/google-research/tabfm/pull/42); the
+   others were fixed independently upstream or characterized. See
    [docs/upstream-bugs.md](docs/upstream-bugs.md).
 
 ## What this repository contains
@@ -149,9 +151,13 @@ single-seed run variance (MIC 0.891 vs 0.889, concrete R2 0.950 vs 0.949), so it
 not be read as a strict ranking yet. The tree baseline was strengthened: beyond the
 "heavy" RandomizedSearch XGBoost, an Optuna-tuned XGBoost (100 trials, 3-fold inner CV)
 was run on all 10 fold-matched datasets, and TabFM beat it on every one. On 8 the margin
-is +0.013 to +0.055 (maternal 0.877 vs 0.821, houses R2 0.898 vs 0.856); on 2 it is
-inside single-seed noise and is not claimed (MIC +0.001, diamonds +0.002). So "beats
-tuned trees" now holds against a real tuning budget, not just the light presets. Two
+is +0.013 to +0.055 (maternal 0.877 vs 0.821, houses R2 0.898 vs 0.856); on 2 the
+margin is too thin to claim and is reported as a tie (MIC +0.001, diamonds +0.002). So
+"beats tuned trees" now holds against a real tuning budget, not just the light presets.
+A two-sided multi-seed check (seeds 0/1/2 for TabFM and the baselines) confirms TabFM's
+own run variance is tiny (std <= 0.0006), so these ties reflect test-set granularity and
+the baselines' variance, not TabFM noise; details in
+[results/phase3_seeds/SEED_VARIANCE.md](results/phase3_seeds/SEED_VARIANCE.md). Two
 comparisons remain weak points, not clean wins: diamonds is only two fold-matched folds,
 and maternal_health_risk mixes a CPU fold0 with GPU folds 1-2.
 
@@ -160,11 +166,14 @@ Single-predict latency vs in-context rows (32-member ensemble, 20 features):
 
 | n_train | GPU latency | GPU peak mem | CPU latency |
 |---|---|---|---|
-| 100 | 2.3 s | 22.75 GB | 33.4 s |
-| 1000 | 4.6 s | 22.75 GB | (see docs) |
-| 5000 | 31.1 s | 22.76 GB | (see docs) |
-| 10000 | 105.7 s | 22.78 GB | - |
+| 100 | 2.3 s | 22.75 GB | 32.5 s |
+| 1000 | 4.6 s | 22.75 GB | 147.3 s |
+| 5000 | 31.1 s | 22.76 GB | 1299.2 s |
+| 10000 | 105.7 s | 22.78 GB | (not run) |
 | >10000 | OOM | >24 GB | fits, slow |
+
+(GPU peak mem is the observed default with XLA preallocation on; the true model
+footprint is ~16.95 GB, see below. CPU latencies are the Studio M4 Max.)
 
 Reported peak memory was flat at ~22.75 GB, but that run did NOT disable XLA
 preallocation, so the figure included XLA's preallocated pool. A control run with
@@ -175,8 +184,9 @@ has a large, flat ~16.95 GB footprint dominated by the 32-member ensemble's fixe
 cost. Extending the prealloc-off sweep, the footprint stays flat at ~16.95 GB and
 n=20000 now fits (it did not with prealloc on); n=30000 OOMs. So disabling
 preallocation roughly doubles the usable context ceiling on the 24 GB card (from ~10k
-to ~20k rows), and the original >10k OOM was the pool, not the model. The GPU is ~15
-to 25x faster than CPU where it fits; there is no speed crossover, only a memory ceiling.
+to ~20k rows), and the original >10k OOM was the pool, not the model. The GPU is ~14
+to 42x faster than CPU where it fits, and the gap widens with context; there is no
+speed crossover, only a memory ceiling.
 
 ## Conclusions
 
@@ -232,8 +242,9 @@ are not portable; use the per-dataset commands above on any single machine.
 ## Coverage and limitations (honest)
 
 1. 9 of 13 target datasets are fully scored (3 folds, TabFM and all baselines on the
-   same device). diamonds has 1 fold-matched comparison; maternal_health_risk fold0
-   ran on CPU while folds 1-2 ran on GPU (bf16 cross-device differences are ~1 sample).
+   same device). diamonds has 2 fold-matched comparisons (fold2 TabFM did not
+   complete); maternal_health_risk fold0 ran on CPU while folds 1-2 ran on GPU (bf16
+   cross-device differences are ~1 sample).
 2. Not scored, reported as findings: Bioresponse (TabFM failed, high-dimensional),
    SDSS17 (78k) and GiveMeSomeCredit (150k) (TabFM impractically slow, did not complete).
 3. The heavy XGBoost tuning occasionally underperformed the default on small folds
