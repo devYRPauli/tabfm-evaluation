@@ -1,0 +1,90 @@
+[
+  {
+    "n_train": 100,
+    "n_features": 20,
+    "n_test": 100,
+    "device": "cuda",
+    "latency_s_median": 1.83707355405204,
+    "peak_gpu_mem_mib": 4675,
+    "peak_torch_alloc_mib": 3187.12646484375,
+    "peak_torch_reserved_mib": 3404.0,
+    "status": "ok"
+  },
+  {
+    "n_train": 500,
+    "n_features": 20,
+    "n_test": 100,
+    "device": "cuda",
+    "latency_s_median": 2.1914384979754686,
+    "peak_gpu_mem_mib": 4801,
+    "peak_torch_alloc_mib": 3258.79248046875,
+    "peak_torch_reserved_mib": 3530.0,
+    "status": "ok"
+  },
+  {
+    "n_train": 1000,
+    "n_features": 20,
+    "n_test": 100,
+    "device": "cuda",
+    "latency_s_median": 3.0235616308636963,
+    "peak_gpu_mem_mib": 4967,
+    "peak_torch_alloc_mib": 3362.79443359375,
+    "peak_torch_reserved_mib": 3696.0,
+    "status": "ok"
+  },
+  {
+    "n_train": 2000,
+    "n_features": 20,
+    "n_test": 100,
+    "device": "cuda",
+    "latency_s_median": 5.0525728079956025,
+    "peak_gpu_mem_mib": 5357,
+    "peak_torch_alloc_mib": 3569.6494140625,
+    "peak_torch_reserved_mib": 4086.0,
+    "status": "ok"
+  },
+  {
+    "n_train": 5000,
+    "n_features": 20,
+    "n_test": 100,
+    "device": "cuda",
+    "latency_s_median": 14.097697629127651,
+    "peak_gpu_mem_mib": 5381,
+    "peak_torch_alloc_mib": 3993.62890625,
+    "peak_torch_reserved_mib": 4894.0,
+    "status": "ok"
+  },
+  {
+    "n_train": 10000,
+    "n_features": 20,
+    "n_test": 100,
+    "device": "cuda",
+    "latency_s_median": 34.52562316204421,
+    "peak_gpu_mem_mib": 6013,
+    "peak_torch_alloc_mib": 4151.7294921875,
+    "peak_torch_reserved_mib": 5526.0,
+    "status": "ok"
+  },
+  {
+    "n_train": 20000,
+    "n_features": 20,
+    "n_test": 100,
+    "device": "cuda",
+    "latency_s_median": 87.81828981498256,
+    "peak_gpu_mem_mib": 8069,
+    "peak_torch_alloc_mib": 5155.5146484375,
+    "peak_torch_reserved_mib": 7582.0,
+    "status": "ok"
+  },
+  {
+    "n_train": 40000,
+    "n_features": 20,
+    "n_test": 100,
+    "device": "cuda",
+    "latency_s_median": 245.36542095290497,
+    "peak_gpu_mem_mib": 12149,
+    "peak_torch_alloc_mib": 7154.33154296875,
+    "peak_torch_reserved_mib": 11662.0,
+    "status": "ok"
+  }
+]

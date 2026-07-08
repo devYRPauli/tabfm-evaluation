@@ -62,6 +62,60 @@ Two findings:
 Feature width also costs latency (GPU): at n=1000, 20 features is 4.6 s vs 100
 features 7.1 s; at n=5000, 31.1 s vs 44.9 s.
 
+## PyTorch backend (upstream main: bf16 compute + activation chunking)
+
+All of the above uses the JAX backend at our pinned commit b6ea70b. After the study,
+a TabFM author noted the repo was updated to enable bf16 computation and activation
+chunking "for speed and memory." Those two changes are PyTorch-backend-only and
+post-date our pin (upstream commits cc56f13 and 99d72b7); the JAX backend already
+computed in bfloat16 at b6ea70b, so the JAX accuracy and the numbers above are
+unaffected. The genuinely-new datapoint is the PyTorch backend at current main.
+
+Same 4090 (GPU 1), same sweep (n_features=20, n_test=100, seed 0), PyTorch backend at
+upstream main with bf16 + chunking on by default. `torch alloc` is
+`torch.cuda.max_memory_allocated` (device-authoritative live working set); `torch
+reserved` is the caching-allocator reservation; `nvidia-smi` is total-on-card and noisy
+on this shared 2-GPU host.
+
+| n_train | median latency | torch alloc | torch reserved | nvidia-smi used |
+|---|---|---|---|---|
+| 100 | 1.84 s | 3187 MiB | 3404 MiB | 4675 MiB |
+| 500 | 2.19 s | 3259 MiB | 3530 MiB | 4801 MiB |
+| 1000 | 3.02 s | 3363 MiB | 3696 MiB | 4967 MiB |
+| 2000 | 5.05 s | 3570 MiB | 4086 MiB | 5357 MiB |
+| 5000 | 14.10 s | 3994 MiB | 4894 MiB | 5381 MiB |
+| 10000 | 34.53 s | 4152 MiB | 5526 MiB | 6013 MiB |
+| 20000 | 87.82 s | 5156 MiB | 7582 MiB | 8069 MiB |
+| 40000 | 245.37 s | 7154 MiB | 11662 MiB | 12149 MiB |
+
+The chunking is the story. Where the JAX backend sat at a ~16.95 GB flat footprint and
+OOM'd past ~20k rows on the 24 GB card, the PyTorch backend's true working set scales
+gently (3.2 GB at n=100 to 7.0 GB at n=40000) and n=40000 fits with ~12 GB of headroom.
+The two memory metrics are not the same quantity: the JAX column is nvidia-smi (masked by
+XLA preallocation), the PyTorch `torch alloc` column is device-authoritative, so this is
+not a like-for-like allocation delta. The honest comparison is "flat ~16.95 GB, OOM at
+~20-30k" (JAX pin) versus "3-7 GB, fits 40k" (PyTorch main).
+
+Latency, same 4090, directly comparable (both are wall-clock predict medians):
+
+| n_train | JAX (b6ea70b) | PyTorch (main) | speedup |
+|---|---|---|---|
+| 100 | 2.07 s | 1.84 s | 1.1x |
+| 500 | 2.88 s | 2.19 s | 1.3x |
+| 1000 | 4.36 s | 3.02 s | 1.4x |
+| 2000 | 8.87 s | 5.05 s | 1.8x |
+| 5000 | 31.60 s | 14.10 s | 2.2x |
+| 10000 | 107.29 s | 34.53 s | 3.1x |
+| 20000 | 384.07 s | 87.82 s | 4.4x |
+| 40000 | OOM (>24 GB) | 245.37 s | - |
+
+The PyTorch-main path is faster too, and the gap widens with context (roughly par at
+n=100, ~4x at n=20000). This is a same-hardware comparison of two code states (older JAX
+pin vs current chunked PyTorch main), not an inherent JAX-vs-PyTorch verdict. But for
+anyone running TabFM on a single 24 GB GPU today, the practical takeaway is concrete: the
+updated PyTorch backend fits roughly 2x the context and runs several times faster at large
+context. Raw data: results/phase4/timing_workstation-4090_gpu1_pytorch.json.
+
 ## CPU (Mac Studio M4 Max, 64 GB)
 
 | n_train | median latency |
