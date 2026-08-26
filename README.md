@@ -276,6 +276,9 @@ please open an issue and it will be fixed.
 
 ## Licenses
 
+The reproduction code in this repository is MIT licensed. The licenses below cover the model under test, not this work.
+
+
 The reproduction code in this repository is provided as-is for research use. TabFM's
 own code is Apache-2.0; its weights are `tabfm-non-commercial-v1.0`. This study is a
 non-commercial evaluation and does not redistribute the weights.
